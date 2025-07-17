@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ghulam Ali | Portfolio</title>
+  <meta name="description" content="Portfolio of Ghulam Ali, an Electrical Engineering student specializing in AI, IoT, and Embedded Systems.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
@@ -62,9 +63,8 @@
       animation: blink 0.7s infinite;
     }
     @keyframes blink {
-      0% { border-color: white; }
+      0%, 100% { border-color: white; }
       50% { border-color: transparent; }
-      100% { border-color: white; }
     }
     .dark-toggle {
       position: absolute;
@@ -150,16 +150,17 @@
     }
     .timeline-item {
       margin-bottom: 20px;
+      position: relative;
     }
     .timeline-item::before {
-      content: "\2022";
+      content: "";
       position: absolute;
       left: -30px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
       background: var(--accent);
-      color: #fff;
       border-radius: 50%;
-      padding: 6px;
-      font-size: 12px;
     }
     footer {
       text-align: center;
@@ -177,21 +178,33 @@
       font-weight: 600;
       text-decoration: none;
     }
+    @media (max-width: 768px) {
+      section {
+        margin: 20px;
+        padding: 25px;
+      }
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .contact-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <i class="fas fa-moon dark-toggle" onclick="toggleDarkMode()"></i>
-    <img src="assets/profile.jpg" alt="Ghulam Ali" class="profile-img">
+    <i class="fas fa-moon dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode"></i>
+    <img src="assets/profile.jpg" alt="Ghulam Ali" class="profile-img" loading="lazy">
     <h1>Ghulam Ali</h1>
     <p><span id="typewriter"></span></p>
   </header>
 
   <section class="reveal">
     <h2><i class="fas fa-user"></i> About Me</h2>
-    <p>
-      I'm a sophomore Electrical Engineering student at IST Islamabad, passionate about building intelligent hardware systems, embedded programming, and integrating AI into real-world electronics.
-    </p>
+    <p>I'm a sophomore Electrical Engineering student at IST Islamabad, passionate about building intelligent hardware systems, embedded programming, and integrating AI into real-world electronics.</p>
   </section>
 
   <section class="reveal">
@@ -229,10 +242,10 @@
   <section class="reveal">
     <h2><i class="fas fa-envelope"></i> Contact</h2>
     <div class="contact-links">
-      <a href="https://github.com/ghulamaliqureshi" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      <a href="https://www.linkedin.com/in/ghulamaliqureshi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/ghulamaliqureshi" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://www.linkedin.com/in/ghulamaliqureshi" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
       <a href="mailto:ghulamaliqureshi12@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-      <a href="https://medium.com/@ghulamaliqureshi" target="_blank"><i class="fab fa-medium"></i> Medium</a>
+      <a href="https://medium.com/@ghulamaliqureshi" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium"></i> Medium</a>
     </div>
     <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
     <div style="margin-top:30px">
@@ -255,17 +268,24 @@
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark'));
     }
+
     const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
     let i = 0;
+
     function typeWriter() {
       if (i < typeText.length) {
-        document.getElementById("typewriter").innerHTML += typeText.charAt(i);
+        document.getElementById("typewriter").textContent += typeText.charAt(i);
         i++;
         setTimeout(typeWriter, 80);
       }
     }
+
     window.onload = function () {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+      }
       typeWriter();
       window.addEventListener("scroll", () => {
         document.querySelectorAll("section").forEach((sec) => {
@@ -274,7 +294,7 @@
             sec.classList.add("reveal");
           }
         });
-      };
+      });
     };
   </script>
 </body>
