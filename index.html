@@ -7,72 +7,68 @@
   <meta name="description" content="Portfolio of Ghulam Ali, an Electrical Engineering student specializing in AI, IoT, and Embedded Systems.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
   <style>
     :root {
-      --bg: #f1f5f9;
+      --bg: #f8fafc;
       --fg: #1a1a1a;
       --card-bg: #ffffff;
-      --accent: #1e40af;
-      --card-shadow: rgba(0, 0, 0, 0.08);
+      --accent: #2563eb;
+      --card-shadow: rgba(0, 0, 0, 0.1);
     }
     body.dark {
       --bg: #0f172a;
-      --fg: #f8fafc;
+      --fg: #f1f5f9;
       --card-bg: #1e293b;
       --accent: #60a5fa;
       --card-shadow: rgba(255, 255, 255, 0.05);
     }
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg);
       color: var(--fg);
-      transition: all 0.3s ease-in-out;
-      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+      scroll-behavior: smooth;
     }
     header {
       background: linear-gradient(to right, #0f172a, #1e293b);
       color: #fff;
       text-align: center;
-      padding: 70px 20px 40px;
+      padding: 80px 20px 50px;
       position: relative;
     }
+    .dark-toggle {
+      position: absolute;
+      top: 20px; right: 20px;
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #fbbf24;
+    }
+    .dark-toggle:hover { transform: scale(1.2); }
     header img.profile-img {
-      width: 160px;
-      height: 160px;
+      width: 150px; height: 150px;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid #fff;
+      border: 4px solid white;
       margin-bottom: 20px;
       transition: transform 0.4s ease;
     }
-    header img.profile-img:hover {
-      transform: scale(1.05);
-    }
+    header img.profile-img:hover { transform: scale(1.05); }
     header h1 {
-      font-size: 2.8em;
+      font-size: 2.5em;
       font-weight: 700;
     }
-    header p span#typewriter {
+    #typewriter {
       border-right: 2px solid white;
+      padding: 5px;
       animation: blink 0.7s infinite;
+      display: inline-block;
     }
     @keyframes blink {
       0%, 100% { border-color: white; }
       50% { border-color: transparent; }
-    }
-    .dark-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      cursor: pointer;
-      font-size: 1.5em;
-      color: #fbbf24;
     }
     section {
       max-width: 960px;
@@ -91,16 +87,13 @@
     }
     h2 {
       font-size: 1.8em;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: var(--accent);
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+    ul { list-style: none; padding: 0; }
     li {
       display: flex;
       gap: 20px;
@@ -110,7 +103,6 @@
     li i {
       font-size: 2em;
       color: var(--accent);
-      min-width: 40px;
     }
     .skills span {
       display: inline-block;
@@ -125,27 +117,23 @@
     .contact-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 15px;
       margin-top: 20px;
     }
     .contact-links a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       background: #e2e8f0;
-      padding: 12px 20px;
+      padding: 12px 18px;
       border-radius: 12px;
       text-decoration: none;
       color: #1e293b;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .contact-links i {
-      font-size: 1.2em;
-      color: var(--accent);
-    }
+    .contact-links i { color: var(--accent); }
     .timeline {
       border-left: 4px solid var(--accent);
-      margin-left: 20px;
       padding-left: 20px;
     }
     .timeline-item {
@@ -155,18 +143,12 @@
     .timeline-item::before {
       content: "";
       position: absolute;
-      left: -30px;
+      left: -28px;
       top: 5px;
       width: 12px;
       height: 12px;
       background: var(--accent);
       border-radius: 50%;
-    }
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #64748b;
-      font-size: 0.95em;
     }
     .resume-btn {
       margin-top: 30px;
@@ -178,25 +160,35 @@
       font-weight: 600;
       text-decoration: none;
     }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 50%;
+      font-size: 1.4em;
+      display: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+      font-size: 0.95em;
+    }
     @media (max-width: 768px) {
-      section {
-        margin: 20px;
-        padding: 25px;
-      }
-      li {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .contact-links {
-        flex-direction: column;
-        gap: 12px;
-      }
+      section { margin: 20px; padding: 25px; }
+      li { flex-direction: column; align-items: flex-start; }
+      .contact-links { flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <i class="fas fa-moon dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode"></i>
+    <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
     <img src="assets/profile.jpg" alt="Ghulam Ali" class="profile-img" loading="lazy">
     <h1>Ghulam Ali</h1>
     <p><span id="typewriter"></span></p>
@@ -248,54 +240,53 @@
       <a href="https://medium.com/@ghulamaliqureshi" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium"></i> Medium</a>
     </div>
     <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
-    <div style="margin-top:30px">
-      <div class="badge-base LI-profile-badge"
-        data-locale="en_US"
-        data-size="medium"
-        data-theme="dark"
-        data-type="VERTICAL"
-        data-vanity="ghulamaliqureshi"
-        data-version="v1">
-        <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi?trk=profile-badge">Ghulam Ali Qureshi</a>
-      </div>
-    </div>
   </section>
 
   <footer>
     <p>&copy; 2025 Ghulam Ali | Portfolio</p>
   </footer>
 
+  <div class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><i class="fas fa-arrow-up"></i></div>
+
   <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const backToTop = document.querySelector(".back-to-top");
+
     function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      themeToggle.classList = isDark ? 'fas fa-sun dark-toggle' : 'fas fa-moon dark-toggle';
     }
 
-    const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
-    let i = 0;
+    themeToggle.onclick = toggleDarkMode;
 
-    function typeWriter() {
-      if (i < typeText.length) {
-        document.getElementById("typewriter").textContent += typeText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 80);
+    window.onload = () => {
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) {
+        body.classList.add('dark');
+        themeToggle.classList = 'fas fa-sun dark-toggle';
       }
-    }
-
-    window.onload = function () {
-      if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark');
+      const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
+      let i = 0;
+      function typeWriter() {
+        if (i < typeText.length) {
+          document.getElementById("typewriter").textContent += typeText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 70);
+        }
       }
       typeWriter();
-      window.addEventListener("scroll", () => {
-        document.querySelectorAll("section").forEach((sec) => {
-          const rect = sec.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100) {
-            sec.classList.add("reveal");
-          }
-        });
-      });
     };
+
+    window.addEventListener("scroll", () => {
+      document.querySelectorAll("section").forEach((sec) => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) sec.classList.add("reveal");
+      });
+      backToTop.style.display = window.scrollY > 300 ? "block" : "none";
+    });
   </script>
 </body>
 </html>
