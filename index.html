@@ -107,12 +107,10 @@
       margin-bottom: 20px;
       align-items: center;
     }
-    li img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
+    li i {
+      font-size: 2em;
+      color: var(--accent);
+      min-width: 40px;
     }
     .skills span {
       display: inline-block;
@@ -199,9 +197,9 @@
   <section class="reveal">
     <h2><i class="fas fa-project-diagram"></i> Projects</h2>
     <ul>
-      <li><img src="assets/gas-sensor.jpg" alt="Gas Sensor"><div><strong>Gas Sensor Monitoring:</strong> Real-time smoke monitoring using ESP32 + Firebase.</div></li>
-      <li><img src="assets/switch.jpg" alt="Switch"><div><strong>Push-to-Make/Break Switch:</strong> A simple yet functional hardware circuit project.</div></li>
-      <li><img src="assets/scoreboard.jpg" alt="Scoreboard"><div><strong>Cricket Scoreboard:</strong> Microcontroller-based one-over scorer with LED display.</div></li>
+      <li><i class="fas fa-fire-extinguisher"></i><div><strong>Gas Sensor Monitoring:</strong> Real-time smoke monitoring using ESP32 + Firebase.</div></li>
+      <li><i class="fas fa-toggle-on"></i><div><strong>Push-to-Make/Break Switch:</strong> A simple yet functional hardware circuit project.</div></li>
+      <li><i class="fas fa-table"></i><div><strong>Cricket Scoreboard:</strong> Microcontroller-based one-over scorer with LED display.</div></li>
     </ul>
   </section>
 
@@ -224,7 +222,7 @@
     <div class="timeline">
       <div class="timeline-item"><strong>2023:</strong> Began B.E. Electrical Engineering at IST, Islamabad</div>
       <div class="timeline-item"><strong>2024:</strong> Sophomore year, explored Embedded Systems & AI</div>
-      <div class="timeline-item"><strong>2024:</strong> Internship in Embedded Systems & IoT</div>
+      <div class="timeline-item"><strong>2025:</strong> Worked on an Embedded Systems & IoT Project</div>
     </div>
   </section>
 
@@ -238,7 +236,13 @@
     </div>
     <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
     <div style="margin-top:30px">
-      <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="ghulamaliqureshi" data-version="v1">
+      <div class="badge-base LI-profile-badge"
+        data-locale="en_US"
+        data-size="medium"
+        data-theme="dark"
+        data-type="VERTICAL"
+        data-vanity="ghulamaliqureshi"
+        data-version="v1">
         <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi?trk=profile-badge">Ghulam Ali Qureshi</a>
       </div>
     </div>
@@ -252,7 +256,6 @@
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
     }
-
     const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
     let i = 0;
     function typeWriter() {
@@ -271,7 +274,7 @@
             sec.classList.add("reveal");
           }
         });
-      });
+      };
     };
   </script>
 </body>
