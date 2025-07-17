@@ -57,9 +57,14 @@
       font-size: 2.8em;
       font-weight: 700;
     }
-    header p {
-      font-size: 1.2em;
-      color: #cbd5e1;
+    header p span#typewriter {
+      border-right: 2px solid white;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0% { border-color: white; }
+      50% { border-color: transparent; }
+      100% { border-color: white; }
     }
     .dark-toggle {
       position: absolute;
@@ -76,6 +81,13 @@
       border-radius: 16px;
       padding: 40px;
       box-shadow: 0 12px 40px var(--card-shadow);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.reveal {
+      opacity: 1;
+      transform: translateY(0);
     }
     h2 {
       font-size: 1.8em;
@@ -157,6 +169,16 @@
       color: #64748b;
       font-size: 0.95em;
     }
+    .resume-btn {
+      margin-top: 30px;
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -164,17 +186,17 @@
     <i class="fas fa-moon dark-toggle" onclick="toggleDarkMode()"></i>
     <img src="assets/profile.jpg" alt="Ghulam Ali" class="profile-img">
     <h1>Ghulam Ali</h1>
-    <p>Electrical Engineering | AI | IoT | Embedded Systems</p>
+    <p><span id="typewriter"></span></p>
   </header>
 
-  <section>
+  <section class="reveal">
     <h2><i class="fas fa-user"></i> About Me</h2>
     <p>
       I'm a sophomore Electrical Engineering student at IST Islamabad, passionate about building intelligent hardware systems, embedded programming, and integrating AI into real-world electronics.
     </p>
   </section>
 
-  <section>
+  <section class="reveal">
     <h2><i class="fas fa-project-diagram"></i> Projects</h2>
     <ul>
       <li><img src="assets/gas-sensor.jpg" alt="Gas Sensor"><div><strong>Gas Sensor Monitoring:</strong> Real-time smoke monitoring using ESP32 + Firebase.</div></li>
@@ -183,7 +205,7 @@
     </ul>
   </section>
 
-  <section>
+  <section class="reveal">
     <h2><i class="fas fa-cogs"></i> Skills</h2>
     <div class="skills">
       <span><i class="fab fa-python"></i> Python</span>
@@ -197,7 +219,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="reveal">
     <h2><i class="fas fa-stream"></i> Experience Timeline</h2>
     <div class="timeline">
       <div class="timeline-item"><strong>2023:</strong> Began B.E. Electrical Engineering at IST, Islamabad</div>
@@ -206,7 +228,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="reveal">
     <h2><i class="fas fa-envelope"></i> Contact</h2>
     <div class="contact-links">
       <a href="https://github.com/ghulamaliqureshi" target="_blank"><i class="fab fa-github"></i> GitHub</a>
@@ -214,6 +236,7 @@
       <a href="mailto:ghulamaliqureshi12@gmail.com"><i class="fas fa-envelope"></i> Email</a>
       <a href="https://medium.com/@ghulamaliqureshi" target="_blank"><i class="fab fa-medium"></i> Medium</a>
     </div>
+    <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
     <div style="margin-top:30px">
       <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="ghulamaliqureshi" data-version="v1">
         <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi?trk=profile-badge">Ghulam Ali Qureshi</a>
@@ -229,6 +252,27 @@
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
     }
+
+    const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
+    let i = 0;
+    function typeWriter() {
+      if (i < typeText.length) {
+        document.getElementById("typewriter").innerHTML += typeText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80);
+      }
+    }
+    window.onload = function () {
+      typeWriter();
+      window.addEventListener("scroll", () => {
+        document.querySelectorAll("section").forEach((sec) => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            sec.classList.add("reveal");
+          }
+        });
+      });
+    };
   </script>
 </body>
 </html>
