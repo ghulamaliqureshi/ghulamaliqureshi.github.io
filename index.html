@@ -41,11 +41,14 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
+    header, main, section {
+      margin-bottom: 30px;
+    }
+
     .card {
       background-color: var(--card-bg);
       box-shadow: 0 12px 40px var(--card-shadow);
       border-radius: 16px;
-      margin-bottom: 30px;
     }
 
     .dark-toggle {
@@ -55,7 +58,7 @@
       z-index: 1000;
       cursor: pointer;
       font-size: 1.5em;
-      color: #fbbf24;
+      color: var(--accent);
     }
 
     .typewriter {
@@ -77,7 +80,7 @@
 
     .skills span {
       background: var(--badge-bg);
-      color: #000;
+      color: var(--fg);
       padding: 10px 16px;
       border-radius: 25px;
       font-weight: 600;
@@ -87,13 +90,18 @@
     }
 
     .skills i {
-      color: #000;
+      color: var(--fg);
     }
 
     .btn-outline-dark {
       background-color: var(--button-bg);
       color: var(--button-fg);
       border: none;
+    }
+    .btn-outline-dark:hover,
+    .btn-outline-dark:focus {
+      background-color: var(--accent);
+      color: #fff;
     }
 
     .resume-btn {
@@ -116,9 +124,13 @@
       padding: 10px 14px;
       border-radius: 50%;
       font-size: 1.4em;
-      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
       cursor: pointer;
       z-index: 1000;
+    }
+    .back-to-top.show {
+      opacity: 1;
     }
 
     footer {
@@ -130,20 +142,20 @@
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
-    <div class="text-center mb-4">
-      <img src="assets/profile.jpg" alt="Ghulam Ali" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
-      <h1>Ghulam Ali</h1>
-      <p><span id="typewriter" class="typewriter"></span></p>
-    </div>
+  <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
+  <header class="text-center py-5">
+    <img src="assets/profile.jpg" alt="Portrait of Ghulam Ali" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+    <h1>Ghulam Ali</h1>
+    <p><span id="typewriter" class="typewriter"></span></p>
+  </header>
 
-    <div class="card p-4">
+  <main class="container">
+    <section class="card p-4">
       <h2><i class="fas fa-user"></i> About Me</h2>
       <p>I'm a sophomore Electrical Engineering student at IST Islamabad, passionate about building intelligent hardware systems, embedded programming, and integrating AI into real-world electronics.</p>
-    </div>
+    </section>
 
-    <div class="card p-4">
+    <section class="card p-4">
       <h2><i class="fas fa-project-diagram"></i> Projects</h2>
       <div class="accordion" id="projectsAccordion">
         <div class="accordion-item">
@@ -156,7 +168,7 @@
             <div class="accordion-body">
               Real-time smoke monitoring using ESP32 + Firebase.<br>
               <strong>Tech Stack:</strong> ESP32, MQ2, Firebase<br>
-              <strong>GitHub:</strong> <a href="#">View Project</a>
+              <strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener noreferrer">View Project</a>
             </div>
           </div>
         </div>
@@ -169,7 +181,7 @@
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
             <div class="accordion-body">
               Functional hardware circuit project.<br>
-              <strong>GitHub:</strong> <a href="#">View Project</a>
+              <strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener noreferrer">View Project</a>
             </div>
           </div>
         </div>
@@ -182,14 +194,14 @@
           <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
             <div class="accordion-body">
               One-over scorer using microcontroller and LED display.<br>
-              <strong>GitHub:</strong> <a href="#">View Project</a>
+              <strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener noreferrer">View Project</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="card p-4">
+    <section class="card p-4">
       <h2><i class="fas fa-cogs"></i> Skills</h2>
       <div class="skills">
         <span><i class="fab fa-python"></i> Python</span>
@@ -201,45 +213,37 @@
         <span><i class="fas fa-brain"></i> YOLOv4-Tiny</span>
         <span><i class="fas fa-robot"></i> TensorFlow Lite</span>
       </div>
-    </div>
+    </section>
 
-    <div class="card p-4">
+    <section class="card p-4">
       <h2><i class="fas fa-stream"></i> Experience Timeline</h2>
       <ul>
         <li>2023: Began B.E. in Electrical Engineering at IST Islamabad</li>
         <li>2024: Focused on Embedded Systems & AI</li>
         <li>2024: Internship in Embedded Systems & IoT</li>
       </ul>
-    </div>
+    </section>
 
-    <div class="card p-4">
+    <section class="card p-4">
       <h2><i class="fas fa-envelope"></i> Contact</h2>
       <div class="d-flex flex-wrap gap-3">
         <a href="mailto:ghulamaliqureshi12@gmail.com" class="btn btn-outline-dark"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://github.com/ghulamaliqureshi" class="btn btn-outline-dark"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://www.linkedin.com/in/ghulamaliqureshi" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://medium.com/@ghulamaliqureshi" class="btn btn-outline-dark"><i class="fab fa-medium"></i> Medium</a>
+        <a href="https://github.com/ghulamaliqureshi" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/ghulamaliqureshi" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://medium.com/@ghulamaliqureshi" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium"></i> Medium</a>
       </div>
       <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
+    </section>
+  </main>
 
-      <div class="mt-4">
-        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="ghulamaliqureshi" data-version="v1">
-          <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi">Ghulam Ali</a>
-        </div>
-      </div>
-    </div>
+  <footer>&copy; 2025 Ghulam Ali | Portfolio</footer>
 
-    <footer class="text-center mt-4 text-muted">
-      &copy; 2025 Ghulam Ali | Portfolio
-    </footer>
-  </div>
-
-  <div class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><i class="fas fa-arrow-up"></i></div>
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script>
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
-    const backToTop = document.querySelector(".back-to-top");
+    const backToTop = document.getElementById("backToTop");
 
     function toggleDarkMode() {
       body.classList.toggle('dark');
@@ -258,9 +262,11 @@
       }
       const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
       let i = 0;
+      const typewriter = document.getElementById("typewriter");
+      typewriter.textContent = "";
       function typeWriter() {
         if (i < typeText.length) {
-          document.getElementById("typewriter").textContent += typeText.charAt(i);
+          typewriter.textContent += typeText.charAt(i);
           i++;
           setTimeout(typeWriter, 70);
         }
@@ -269,7 +275,11 @@
     };
 
     window.addEventListener("scroll", () => {
-      backToTop.style.display = window.scrollY > 300 ? "block" : "none";
+      if (window.scrollY > 300) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
