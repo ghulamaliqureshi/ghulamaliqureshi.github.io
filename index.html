@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <m
+eta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ghulam Ali | Portfolio</title>
   <meta name="description" content="Portfolio of Ghulam Ali, Electrical Engineering student specializing in AI, IoT, and Embedded Systems.">
@@ -19,6 +20,7 @@
       --badge-bg: #e0e7ff;
       --button-bg: #1e40af;
       --button-fg: #ffffff;
+      --link-color: #1e40af;
     }
 
     body.dark {
@@ -29,6 +31,7 @@
       --badge-bg: #334155;
       --button-bg: #f8fafc;
       --button-fg: #1a1a1a;
+      --link-color: #93c5fd;
     }
 
     body {
@@ -38,109 +41,48 @@
       transition: all 0.3s ease;
     }
 
-    header {
-      text-align: center;
-      padding: 60px 20px 30px;
+    a, a:visited {
+      color: var(--link-color);
+      text-decoration: underline;
     }
 
-    header img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    a:hover {
+      color: var(--accent);
     }
 
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-top: 15px;
+    .card, .list-group-item {
+      background-color: var(--card-bg);
+      color: var(--fg);
     }
 
-    #typewriter {
-      font-size: 1.1rem;
-      border-right: 2px solid;
-      animation: blink 0.8s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: var(--fg); }
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      padding: 30px;
-      margin-bottom: 30px;
-      border: none;
+    .list-group-item {
+      border-color: var(--accent);
     }
 
     .skills span {
       background: var(--badge-bg);
       color: var(--fg);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      margin: 5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: transform 0.2s;
     }
 
-    .skills span:hover {
-      transform: scale(1.05);
-    }
-
-    .resume-btn, .btn-outline-dark {
+    .btn-outline-dark, .resume-btn {
       background-color: var(--button-bg);
       color: var(--button-fg);
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      border: 1px solid var(--button-fg);
     }
 
     .btn-outline-dark:hover, .resume-btn:hover {
       background: var(--accent);
-      color: #fff;
-    }
-
-    .dark-toggle {
-      position: fixed;
-      top: 25px;
-      right: 25px;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--accent);
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      font-size: 0.9rem;
+      color: #ffffff;
+      border-color: var(--accent);
     }
 
     .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
       background: var(--accent);
-      color: white;
-      border-radius: 50%;
-      padding: 12px;
-      font-size: 1.4rem;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 1000;
+      color: #ffffff;
     }
 
-    .back-to-top.show {
-      opacity: 1;
+    .dark-toggle {
+      color: var(--accent);
     }
   </style>
 </head>
