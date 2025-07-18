@@ -52,14 +52,26 @@
       color: var(--accent);
     }
 
+    header h1,
+    header p {
+      color: var(--fg);
+    }
+
     header, main, section {
       margin-bottom: 30px;
     }
 
     .card {
       background-color: var(--card-bg);
+      color: var(--fg);
       box-shadow: 0 12px 40px var(--card-shadow);
       border-radius: 16px;
+    }
+
+    .card p,
+    .card li,
+    .card strong {
+      color: inherit;
     }
 
     .dark-toggle {
@@ -122,14 +134,15 @@
       font-weight: 600;
       text-decoration: none;
       margin-top: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .resume-btn:hover {
+      background-color: var(--accent);
+      color: #fff;
     }
 
     .accordion-button {
-      background-color: var(--card-bg);
-      color: var(--fg);
-    }
-
-    body.dark .accordion-button {
       background-color: var(--card-bg);
       color: var(--fg);
     }
