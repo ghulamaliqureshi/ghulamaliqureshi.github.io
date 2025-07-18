@@ -16,9 +16,9 @@
       --bg: #f5f7fa;
       --fg: #1a1a1a;
       --card-bg: #ffffff;
-      --accent: #0077b5; /* LinkedIn primary blue */
+      --accent: #0077b5;
       --card-shadow: rgba(0, 119, 181, 0.1);
-      --badge-bg: #e6f0fa; /* Lighter LinkedIn blue shade */
+      --badge-bg: #e6f0fa;
       --button-bg: #0077b5;
       --button-fg: #ffffff;
     }
@@ -27,9 +27,9 @@
       --bg: #1c2526;
       --fg: #e6ecef;
       --card-bg: #2a3b47;
-      --accent: #0097d7; /* Slightly brighter LinkedIn blue for dark mode */
+      --accent: #0097d7;
       --card-shadow: rgba(0, 151, 215, 0.08);
-      --badge-bg: #3b4b5b; /* Darker LinkedIn-inspired shade */
+      --badge-bg: #3b4b5b;
       --button-bg: #e6ecef;
       --button-fg: #000000;
     }
@@ -39,6 +39,17 @@
       background-color: var(--bg);
       color: var(--fg);
       transition: background-color 0.3s, color 0.3s;
+    }
+
+    h2 {
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 i {
+      color: var(--accent);
     }
 
     header, main, section {
@@ -90,9 +101,10 @@
     }
 
     .btn-outline-dark {
-      background-color: var(--button-bg);
-      color: var(--button-fg);
-      border: none;
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      transition: all 0.3s;
     }
 
     .btn-outline-dark:hover,
@@ -139,12 +151,9 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: var(--accent);
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 50%;
-      font-size: 1.4em;
-      box-shadow: 0 4px 20px rgba(0, 119, 181, 0.3);
+      background: transparent;
+      color: var(--accent);
+      font-size: 1.8em;
       opacity: 0;
       transition: opacity 0.3s ease, transform 0.3s;
       cursor: pointer;
@@ -153,7 +162,7 @@
 
     .back-to-top.show {
       opacity: 1;
-      transform: translateY(-10px);
+      transform: translateY(-5px);
     }
 
     footer {
@@ -242,7 +251,7 @@
       <h2><i class="fas fa-stream"></i> Experience Timeline</h2>
       <ul>
         <li>2023: Began B.E. in Electrical Engineering at IST Islamabad</li>
-        <li>2024: Learned hardware skills and cicuit designing</li>
+        <li>2024: Learned hardware skills and circuit designing</li>
         <li>2025: Project in Embedded Systems & IoT</li>
       </ul>
     </section>
