@@ -1,4 +1,3 @@
-<!-- Save this as index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +18,11 @@
       --card-bg: #ffffff;
       --accent: #2563eb;
       --card-shadow: rgba(0, 0, 0, 0.1);
-      --badge-bg: #e0e7ff;
-      --button-bg: #e2e8f0;
+      --badge-bg: #e5e7eb;
+      --button-bg: #000;
+      --button-fg: #fff;
     }
+
     body.dark {
       --bg: #0f172a;
       --fg: #f1f5f9;
@@ -29,45 +30,54 @@
       --accent: #60a5fa;
       --card-shadow: rgba(255, 255, 255, 0.05);
       --badge-bg: #334155;
-      --button-bg: #475569;
+      --button-bg: #f1f5f9;
+      --button-fg: #000;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--bg);
       color: var(--fg);
       transition: background-color 0.3s, color 0.3s;
     }
+
     .card {
       background-color: var(--card-bg);
       box-shadow: 0 12px 40px var(--card-shadow);
       border-radius: 16px;
       margin-bottom: 30px;
     }
+
     .dark-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
       z-index: 1000;
       cursor: pointer;
+      font-size: 1.5em;
       color: #fbbf24;
     }
+
     .typewriter {
       border-right: 2px solid;
       animation: blink 0.7s infinite;
       display: inline-block;
     }
+
     @keyframes blink {
       0%, 100% { border-color: white; }
       50% { border-color: transparent; }
     }
+
     .skills {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
     }
+
     .skills span {
       background: var(--badge-bg);
-      color: var(--accent);
+      color: #000;
       padding: 10px 16px;
       border-radius: 25px;
       font-weight: 600;
@@ -75,21 +85,28 @@
       align-items: center;
       gap: 8px;
     }
+
+    .skills i {
+      color: #000;
+    }
+
     .btn-outline-dark {
       background-color: var(--button-bg);
+      color: var(--button-fg);
       border: none;
-      color: var(--fg);
     }
+
     .resume-btn {
       display: inline-block;
-      background: var(--accent);
-      color: white;
+      background: var(--button-bg);
+      color: var(--button-fg);
       padding: 12px 24px;
       border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
       margin-top: 20px;
     }
+
     .back-to-top {
       position: fixed;
       bottom: 30px;
@@ -103,6 +120,7 @@
       cursor: pointer;
       z-index: 1000;
     }
+
     footer {
       text-align: center;
       padding: 25px;
@@ -113,7 +131,7 @@
 </head>
 <body>
   <div class="container py-5">
-    <i class="fas fa-moon dark-toggle fs-4" id="themeToggle"></i>
+    <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
     <div class="text-center mb-4">
       <img src="assets/profile.jpg" alt="Ghulam Ali" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
       <h1>Ghulam Ali</h1>
@@ -142,7 +160,32 @@
             </div>
           </div>
         </div>
-        <!-- More projects -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              Push-to-Make/Break Switch
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
+            <div class="accordion-body">
+              Functional hardware circuit project.<br>
+              <strong>GitHub:</strong> <a href="#">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+              Cricket Scoreboard
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
+            <div class="accordion-body">
+              One-over scorer using microcontroller and LED display.<br>
+              <strong>GitHub:</strong> <a href="#">View Project</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -178,6 +221,7 @@
         <a href="https://medium.com/@ghulamaliqureshi" class="btn btn-outline-dark"><i class="fab fa-medium"></i> Medium</a>
       </div>
       <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
+
       <div class="mt-4">
         <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="ghulamaliqureshi" data-version="v1">
           <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi">Ghulam Ali</a>
@@ -197,11 +241,14 @@
     const body = document.body;
     const backToTop = document.querySelector(".back-to-top");
 
-    themeToggle.addEventListener('click', () => {
+    function toggleDarkMode() {
       body.classList.toggle('dark');
-      localStorage.setItem('darkMode', body.classList.contains('dark'));
-      themeToggle.classList = body.classList.contains('dark') ? 'fas fa-sun dark-toggle' : 'fas fa-moon dark-toggle';
-    });
+      const isDark = body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      themeToggle.classList = isDark ? 'fas fa-sun dark-toggle' : 'fas fa-moon dark-toggle';
+    }
+
+    themeToggle.onclick = toggleDarkMode;
 
     window.onload = () => {
       const isDark = localStorage.getItem('darkMode') === 'true';
