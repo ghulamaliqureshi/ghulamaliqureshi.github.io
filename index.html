@@ -25,7 +25,7 @@
 
     body.dark {
       --bg: #1c2526;
-      --fg: #e6ecef;
+      --fg: #000;
       --card-bg: #2a3b47;
       --accent: #0097d7;
       --card-shadow: rgba(0, 151, 215, 0.08);
@@ -137,13 +137,20 @@
       color: var(--fg);
     }
 
-    body.dark .accordion-button:not(.collapsed) {
-      background-color: #3b4b5b;
-      color: #fff;
-    }
-
     .accordion-button:focus {
       box-shadow: none;
+    }
+
+    body.dark .accordion-button {
+      background-color: #2a3b47;
+      color: #000;
+      border: 1px solid #000;
+    }
+
+    body.dark .accordion-button:not(.collapsed) {
+      background-color: #3b4b5b;
+      color: #000;
+      border: 1px solid #000;
     }
 
     body.dark .accordion-button::after {
@@ -228,11 +235,11 @@
       <div class="accordion" id="projectsAccordion">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
               Gas Sensor Monitoring
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#projectsAccordion">
+          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
             <div class="accordion-body">
               Real-time smoke monitoring using ESP32 + Firebase.<br>
               <strong>Tech Stack:</strong> ESP32, MQ2, Firebase<br>
@@ -327,6 +334,7 @@
       const isDark = body.classList.contains('dark');
       localStorage.setItem('darkMode', isDark);
       themeToggle.classList = isDark ? 'fas fa-sun dark-toggle' : 'fas fa-moon dark-toggle';
+      updateLinkedInBadge();
     }
 
     function updateLinkedInBadge() {
@@ -337,7 +345,6 @@
 
     themeToggle.onclick = () => {
       toggleDarkMode();
-      updateLinkedInBadge();
     };
 
     window.onload = () => {
@@ -347,6 +354,7 @@
         themeToggle.classList = 'fas fa-sun dark-toggle';
       }
       updateLinkedInBadge();
+
       const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
       let i = 0;
       const typewriter = document.getElementById("typewriter");
