@@ -32,7 +32,7 @@ body.dark {
   --card-shadow: rgba(0, 151, 215, 0.08);
   --badge-bg: #2a2a2a; /* darker badge bg */
   --button-bg: transparent;
-  --button-fg: #00bfff;
+  --button-fg: #ffffff; /* white text/icons in dark mode */
 }
 
 body {
@@ -54,11 +54,6 @@ h2 i {
   color: var(--accent);
 }
 
-body.dark h2,
-body.dark h2 i {
-  color: var(--accent) !important;
-}
-
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -78,7 +73,7 @@ body.dark h2 i {
 
 body.dark .skills span {
   background: var(--badge-bg);
-  color: var(--accent);
+  color: #ffffff; /* White text and icon in dark mode */
 }
 
 .btn-outline-dark,
@@ -103,15 +98,15 @@ body.dark .skills span {
 
 body.dark .btn-outline-dark,
 body.dark .resume-btn {
-  color: var(--accent) !important;
-  border-color: var(--accent) !important;
+  color: #ffffff !important; /* White in dark mode */
+  border-color: #ffffff !important;
 }
 
 body.dark .btn-outline-dark:hover,
 body.dark .btn-outline-dark:focus,
 body.dark .resume-btn:hover,
 body.dark .resume-btn:focus {
-  background-color: var(--accent) !important;
+  background-color: #ffffff !important;
   color: #000 !important;
 }
 
