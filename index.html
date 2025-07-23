@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  
   <style>
     :root {
       --bg: #f5f7fa;
@@ -24,9 +25,9 @@
     }
 
     body.dark {
-      --bg: #1c2526;
-      --fg: #000;
-      --card-bg: #2a3b47;
+      --bg: #0e0e0e;
+      --fg: #ffffff;
+      --card-bg: #121212;
       --accent: #0097d7;
       --card-shadow: rgba(0, 151, 215, 0.08);
       --badge-bg: #3b4b5b;
@@ -52,15 +53,6 @@
       color: var(--accent);
     }
 
-    header h1,
-    header p {
-      color: var(--fg);
-    }
-
-    header, main, section {
-      margin-bottom: 30px;
-    }
-
     .card {
       background-color: var(--card-bg);
       color: var(--fg);
@@ -68,10 +60,90 @@
       border-radius: 16px;
     }
 
-    .card p,
-    .card li,
-    .card strong {
-      color: inherit;
+    .btn-outline-dark,
+    .resume-btn {
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-outline-dark:hover,
+    .btn-outline-dark:focus,
+    .resume-btn:hover,
+    .resume-btn:focus {
+      background-color: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .accordion-button {
+      background-color: var(--card-bg);
+      color: var(--fg);
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+    }
+
+    body.dark .accordion-button {
+      background-color: #121212;
+      color: #fff;
+      border: 1px solid #000;
+    }
+
+    body.dark .accordion-button:not(.collapsed) {
+      background-color: #1a1a1a;
+      color: #fff;
+      border: 1px solid #000;
+    }
+
+    body.dark .accordion-button::after {
+      filter: invert(1);
+    }
+
+    body.dark .btn-outline-dark,
+    body.dark .resume-btn {
+      color: #000 !important;
+      border-color: #000 !important;
+    }
+
+    body.dark .btn-outline-dark:hover,
+    body.dark .btn-outline-dark:focus,
+    body.dark .resume-btn:hover,
+    body.dark .resume-btn:focus {
+      background-color: #000 !important;
+      color: #fff !important;
+    }
+
+    body.dark h2,
+    body.dark h2 i {
+      color: #000 !important;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skills span {
+      background: var(--badge-bg);
+      color: var(--accent);
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    body.dark .skills span {
+      color: #000 !important;
     }
 
     .dark-toggle {
@@ -93,68 +165,6 @@
     @keyframes blink {
       0%, 100% { border-color: white; }
       50% { border-color: transparent; }
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .skills span {
-      background: var(--badge-bg);
-      color: var(--accent);
-      padding: 10px 16px;
-      border-radius: 25px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-outline-dark,
-    .resume-btn {
-      background-color: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
-
-    .btn-outline-dark:hover,
-    .btn-outline-dark:focus,
-    .resume-btn:hover,
-    .resume-btn:focus {
-      background-color: var(--accent);
-      color: #fff;
-    }
-
-    .accordion-button {
-      background-color: var(--card-bg);
-      color: var(--fg);
-    }
-
-    .accordion-button:focus {
-      box-shadow: none;
-    }
-
-    body.dark .accordion-button {
-      background-color: #2a3b47;
-      color: #000;
-      border: 1px solid #000;
-    }
-
-    body.dark .accordion-button:not(.collapsed) {
-      background-color: #3b4b5b;
-      color: #000;
-      border: 1px solid #000;
-    }
-
-    body.dark .accordion-button::after {
-      filter: invert(1);
     }
 
     .back-to-top {
@@ -181,42 +191,12 @@
       color: var(--fg);
       font-size: 0.95em;
     }
-
-    /* === Custom dark mode overrides === */
-
-    body.dark .resume-btn {
-      color: #000 !important;
-      border-color: #000 !important;
-    }
-
-    body.dark .resume-btn:hover,
-    body.dark .resume-btn:focus {
-      background-color: #000 !important;
-      color: #fff !important;
-    }
-
-    body.dark h2,
-    body.dark h2 i {
-      color: #000 !important;
-    }
-
-    body.dark .btn-outline-dark {
-      color: #000 !important;
-      border-color: #000 !important;
-    }
-
-    body.dark .btn-outline-dark:hover,
-    body.dark .btn-outline-dark:focus {
-      background-color: #000 !important;
-      color: #fff !important;
-    }
-
-    body.dark .skills span {
-      color: #000 !important;
-    }
   </style>
 </head>
 <body>
+  <!-- BODY CONTENT STARTS -->
+  <!-- (no changes made to body content, script, or markup) -->
+
   <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
   <header class="text-center py-5">
     <img src="assets/profile.jpg" alt="Portrait of Ghulam Ali" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
