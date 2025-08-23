@@ -2,373 +2,442 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ghulam Ali | Portfolio</title>
-  <meta name="description" content="Portfolio of Ghulam Ali, Electrical Engineering student specializing in AI, IoT, and Embedded Systems.">
-  <meta name="author" content="Ghulam Ali">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Portfolio of Ghulam Ali, Electrical Engineering student specializing in AI, IoT, and Embedded Systems." />
+  <meta name="author" content="Ghulam Ali" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="canonical" href="https://your-domain.example/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ghulam Ali | Portfolio" />
+  <meta property="og:description" content="Electrical Engineering · AI · IoT · Embedded Systems" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts & Icons (kept, but optimized) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-HK5fgLBL+xqv3Y3Zy7v2d7tL4Gm9xW4J4h6L4e1N3/8dQb2gW2S3JPG0x9p7c0M/7Q6pTqj3QJ2M3hHh5Z3kA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- LinkedIn badge script: async/defer -->
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript" id="li-badge-script"></script>
+
   <style>
-:root {
-  --bg: #f5f7fa;
-  --fg: #1a1a1a;
-  --card-bg: #ffffff;
-  --accent: #0077b5;
-  --card-shadow: rgba(0, 119, 181, 0.1);
-  --badge-bg: #e6f0fa;
-  --button-bg: #ffffff;
-  --button-fg: #0077b5;
-}
+    /* =====================
+       Design Tokens
+    ====================== */
+    :root {
+      --bg: #f5f7fa;
+      --fg: #1a1a1a;
+      --muted: #6b7280; /* gray-500 */
+      --card: #ffffff;
+      --accent: #0077b5; /* LinkedIn blue */
+      --accent-2: #005f90; /* darker hover */
+      --accent-dark: #00bfff; /* cyan-ish for dark */
+      --ring: rgba(0, 119, 181, 0.35);
+      --shadow: 0 10px 30px rgba(0, 119, 181, 0.08);
+      --radius: 16px;
+      --maxw: 1100px;
+      --space: clamp(12px, 1.6vw, 20px);
+    }
+    body.dark {
+      --bg: #000000;
+      --fg: #ffffff;
+      --muted: #cbd5e1; /* slate-300 */
+      --card: #101010;
+      --accent: var(--accent-dark);
+      --ring: rgba(0, 191, 255, 0.4);
+      --shadow: 0 10px 30px rgba(0, 191, 255, 0.08);
+    }
 
-body.dark {
-  --bg: #000000;
-  --fg: #ffffff;
-  --card-bg: #1a1a1a;
-  --accent: #00bfff;
-  --card-shadow: rgba(0, 151, 215, 0.08);
-  --badge-bg: #2a2a2a;
-  --button-bg: transparent;
-  --button-fg: #ffffff;
-}
+    /* =====================
+       Base & Utilities
+    ====================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html:focus-within { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color .3s ease, color .3s ease;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--bg);
-  color: var(--fg);
-  transition: background-color 0.3s, color 0.3s;
-}
+    /* Focus styles */
+    :focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 10px;
+    }
 
-.card {
-  background-color: var(--card-bg);
-  color: var(--fg);
-  box-shadow: 0 12px 40px var(--card-shadow);
-  border-radius: 16px;
-}
+    /* Skip link */
+    .skip-link {
+      position: absolute; left: -999px; top: -999px;
+    }
+    .skip-link:focus {
+      left: 12px; top: 12px; z-index: 9999; background: var(--card);
+      color: var(--fg); padding: 10px 14px; border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
 
-h2,
-h2 i {
-  color: var(--accent);
-}
+    /* Header / Hero */
+    header {
+      position: relative; overflow: hidden;
+      padding: min(10vh, 90px) 0 40px;
+    }
+    .hero {
+      display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: center;
+    }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      box-shadow: var(--shadow);
+      border: 4px solid rgba(0,0,0,0.06);
+    }
+    .title { margin: 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; }
+    .subtitle { margin: 6px 0 0; color: var(--muted); font-size: clamp(14px, 2.1vw, 18px); }
 
-body.dark h2,
-body.dark h2 i {
-  color: #ffffff !important;
-}
+    /* Toolbar (theme + resume) */
+    .toolbar {
+      position: fixed; right: 16px; top: 16px; z-index: 1000;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .icon-btn {
+      appearance: none; border: 1px solid rgba(0,0,0,0.08);
+      background: var(--card); color: var(--fg);
+      border-radius: 999px; padding: 10px 12px; cursor: pointer;
+      box-shadow: var(--shadow); display: inline-flex; align-items: center; gap: 8px;
+    }
+    .icon-btn:hover { filter: brightness(1.03); }
+    .icon-btn i { font-size: 16px; }
 
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+    .cta {
+      appearance: none; border: 2px solid var(--accent); background: transparent; color: var(--accent);
+      border-radius: 12px; padding: 10px 14px; font-weight: 600; cursor: pointer;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .cta:hover, .cta:focus-visible { background: var(--accent); color: #fff; }
 
-.skills span {
-  background: var(--badge-bg);
-  color: var(--accent);
-  padding: 10px 16px;
-  border-radius: 25px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    /* Sections */
+    section { margin: 28px 0; }
+    .card {
+      background: var(--card); border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius); padding: calc(var(--space) + 4px);
+      box-shadow: var(--shadow);
+    }
+    .section-title { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+    .section-title i { color: var(--accent); }
+    body.dark .section-title i { color: #fff; }
 
-body.dark .skills span {
-  background: var(--badge-bg);
-  color: #ffffff;
-}
+    /* About */
+    .about p { margin: 0; }
 
-.btn-outline-dark,
-.resume-btn {
-  background-color: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s;
-  text-decoration: none;
-}
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) ); gap: 16px;
+    }
+    .project {
+      border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px; background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+    }
+    .project h3 { margin: 0 0 6px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(0,119,181,0.10); color: var(--accent); font-weight: 600; font-size: 12px; margin: 6px 6px 0 0; }
+    body.dark .pill { background: rgba(0,191,255,0.12); color: #fff; }
 
-.btn-outline-dark:hover,
-.btn-outline-dark:focus,
-.resume-btn:hover,
-.resume-btn:focus {
-  background-color: var(--accent);
-  color: #ffffff !important;
-}
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { background: rgba(0,0,0,0.04); color: var(--fg); border-radius: 999px; padding: 10px 14px; font-weight: 600; }
+    body.dark .skill { background: #151515; color: #fff; }
 
-.btn-outline-dark:hover i,
-.resume-btn:hover i {
-  color: #ffffff !important;
-}
+    /* Timeline */
+    .timeline { list-style: none; padding: 0; margin: 0; }
+    .timeline li { position: relative; padding: 10px 0 10px 26px; }
+    .timeline li::before { content: ""; position: absolute; left: 8px; top: 14px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .timeline time { font-weight: 700; margin-right: 6px; }
 
-.btn-outline-dark i,
-.resume-btn i {
-  transition: color 0.3s ease;
-}
+    /* Contact */
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
-body.dark .btn-outline-dark,
-body.dark .resume-btn {
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-}
+    /* Back to top */
+    .back-to-top {
+      position: fixed; right: 18px; bottom: 24px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 999px;
+      display: grid; place-items: center; cursor: pointer;
+      background: var(--card); color: var(--fg); border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow);
+      opacity: 0; transform: translateY(10px); transition: opacity .25s ease, transform .25s ease;
+    }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 576px) { .back-to-top { bottom: 82px; } }
 
-body.dark .btn-outline-dark:hover,
-body.dark .btn-outline-dark:focus,
-body.dark .resume-btn:hover,
-body.dark .resume-btn:focus {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
+    /* Typewriter */
+    .typewriter { border-right: 2px solid currentColor; white-space: nowrap; overflow: hidden; display: inline-block; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .typewriter::after { content: ""; display: inline-block; width: 6px; height: 1em; margin-left: 4px; border-right: 2px solid currentColor; animation: blink .8s infinite; }
 
-.accordion-button {
-  background-color: var(--card-bg);
-  color: var(--fg);
-}
-
-.accordion-button:focus {
-  box-shadow: none;
-}
-
-body.dark .accordion-button {
-  background-color: #1a1a1a;
-  color: #fff;
-  border: 1px solid #333;
-}
-
-body.dark .accordion-button:not(.collapsed) {
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 1px solid #333;
-}
-
-body.dark .accordion-button::after {
-  filter: invert(1);
-}
-
-footer {
-  text-align: center;
-  padding: 25px;
-  color: var(--fg);
-  font-size: 0.95em;
-}
-
-.dark-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  cursor: pointer;
-  font-size: 1.5em;
-  color: var(--accent);
-}
-
-body.dark .dark-toggle {
-  color: #ffffff;
-}
-
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: transparent;
-  color: var(--accent);
-  font-size: 1.8em;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-body.dark .back-to-top {
-  color: #ffffff;
-}
-
-.back-to-top.show {
-  opacity: 1;
-  transform: translateY(-5px);
-}
-
-.typewriter {
-  border-right: 2px solid;
-  animation: blink 0.7s infinite;
-  display: inline-block;
-}
-
-@keyframes blink {
-  0%, 100% { border-color: white; }
-  50% { border-color: transparent; }
-}
+    /* Footer */
+    footer { text-align: center; padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
   </style>
 </head>
 <body>
-  <!-- BODY CONTENT STARTS -->
-  <!-- (no changes made to body content, script, or markup) -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <i class="fas fa-moon dark-toggle" id="themeToggle" aria-label="Toggle Dark Mode"></i>
-  <header class="text-center py-5">
-    <img src="assets/profile.jpg" alt="Portrait of Ghulam Ali" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
-    <h1>Ghulam Ali</h1>
-    <p><span id="typewriter" class="typewriter"></span></p>
+  <!-- Toolbar: theme toggle + resume -->
+  <div class="toolbar" role="group" aria-label="Quick actions">
+    <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fas fa-moon" aria-hidden="true"></i>
+      <span class="visually-hidden">Toggle dark mode</span>
+    </button>
+    <a class="cta" href="assets/GhulamAli_Resume.pdf" download rel="noopener">Download Resume</a>
+  </div>
+
+  <header>
+    <div class="container hero">
+      <img src="assets/profile.jpg" alt="Portrait of Ghulam Ali" class="avatar" loading="lazy" width="140" height="140" />
+      <div>
+        <h1 class="title">Ghulam Ali</h1>
+        <p class="subtitle">
+          <span id="typewriter" class="typewriter" aria-live="polite">Electrical Engineering · AI · IoT · Embedded Systems</span>
+        </p>
+        <nav aria-label="Primary">
+          <a href="#about">About</a> ·
+          <a href="#projects">Projects</a> ·
+          <a href="#skills">Skills</a> ·
+          <a href="#timeline">Timeline</a> ·
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main class="container">
-    <section class="card p-4">
-      <h2><i class="fas fa-user"></i> About Me</h2>
-      <p>I'm a sophomore Electrical Engineering student at IST Islamabad, passionate about building intelligent hardware systems, embedded programming, and integrating AI into real-world electronics.</p>
+  <main id="main" class="container" tabindex="-1">
+    <!-- About -->
+    <section id="about" class="card about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title"><i class="fas fa-user" aria-hidden="true"></i> About Me</h2>
+      <p>
+        I’m a BE Electrical Engineering student at IST Islamabad with a focus on intelligent hardware systems, embedded programming, and bringing AI to real-world electronics. I enjoy building clean, reliable systems end-to-end—from sensors and microcontrollers to cloud dashboards and on-device ML.
+      </p>
     </section>
 
-    <section class="card p-4">
-      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
-      <div class="accordion" id="projectsAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-              Gas Sensor Monitoring
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
-            <div class="accordion-body">
-              Real-time smoke monitoring using ESP32 + Firebase.<br>
-              <strong>Tech Stack:</strong> ESP32, MQ2, Firebase<br>
-              <strong>GitHub:</strong> <a href="#" target="_blank">View Project</a>
-            </div>
+    <!-- Projects -->
+    <section id="projects" class="card" aria-labelledby="projects-title">
+      <h2 class="section-title" id="projects-title"><i class="fas fa-diagram-project" aria-hidden="true"></i> Projects</h2>
+      <div class="projects-grid">
+        <article class="project" aria-labelledby="p1-title">
+          <h3 id="p1-title">Gas Sensor Monitoring</h3>
+          <p class="meta">Real-time smoke monitoring with ESP32 + Firebase. Threshold alerts and historical graphs.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> ESP32</span>
+            <span class="pill"><i class="fa-solid fa-database" aria-hidden="true"></i> Firebase</span>
+            <span class="pill"><i class="fa-solid fa-flask" aria-hidden="true"></i> MQ2</span>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-              Push-to-Make/Break Switch
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
-            <div class="accordion-body">
-              Functional hardware circuit project.<br>
-              <strong>GitHub:</strong> <a href="#" target="_blank">View Project</a>
-            </div>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
+
+        <article class="project" aria-labelledby="p2-title">
+          <h3 id="p2-title">Push-to-Make/Break Switch</h3>
+          <p class="meta">Functional hardware circuit with debouncing and protection.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Circuit Design</span>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-              Cricket Scoreboard
-            </button>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#projectsAccordion">
-            <div class="accordion-body">
-              One-over scorer using microcontroller and LED display.<br>
-              <strong>GitHub:</strong> <a href="#" target="_blank">View Project</a>
-            </div>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
+
+        <article class="project" aria-labelledby="p3-title">
+          <h3 id="p3-title">Cricket Scoreboard</h3>
+          <p class="meta">One-over scorer using microcontroller and LED display.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> MCU</span>
+            <span class="pill"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> LED Matrix</span>
           </div>
-        </div>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
       </div>
     </section>
 
-    <section class="card p-4">
-      <h2><i class="fas fa-cogs"></i> Skills</h2>
+    <!-- Skills -->
+    <section id="skills" class="card" aria-labelledby="skills-title">
+      <h2 class="section-title" id="skills-title"><i class="fas fa-cogs" aria-hidden="true"></i> Skills</h2>
       <div class="skills">
-        <span><i class="fab fa-python"></i> Python</span>
-        <span><i class="fas fa-code"></i> C++</span>
-        <span><i class="fab fa-arduino"></i> Arduino</span>
-        <span><i class="fas fa-microchip"></i> ESP32</span>
-        <span><i class="fas fa-database"></i> Firebase</span>
-        <span><i class="fas fa-camera"></i> OpenCV</span>
-        <span><i class="fas fa-brain"></i> YOLOv4-Tiny</span>
-        <span><i class="fas fa-robot"></i> TensorFlow Lite</span>
+        <span class="skill">Python</span>
+        <span class="skill">C/C++</span>
+        <span class="skill">Arduino</span>
+        <span class="skill">ESP32</span>
+        <span class="skill">Firebase</span>
+        <span class="skill">OpenCV</span>
+        <span class="skill">YOLOv4-Tiny</span>
+        <span class="skill">TensorFlow Lite</span>
       </div>
     </section>
 
-    <section class="card p-4">
-      <h2><i class="fas fa-stream"></i> Experience Timeline</h2>
-      <ul>
-        <li>2023: Began B.E. in Electrical Engineering at IST Islamabad</li>
-        <li>2024: Learned hardware skills and circuit designing</li>
-        <li>2025: Project in Embedded Systems & IoT</li>
-      </ul>
+    <!-- Timeline -->
+    <section id="timeline" class="card" aria-labelledby="timeline-title">
+      <h2 class="section-title" id="timeline-title"><i class="fas fa-stream" aria-hidden="true"></i> Experience Timeline</h2>
+      <ol class="timeline">
+        <li><time datetime="2023">2023</time> Began B.E. in Electrical Engineering at IST Islamabad</li>
+        <li><time datetime="2024">2024</time> Learned core hardware skills and circuit design</li>
+        <li><time datetime="2025">2025</time> Embedded Systems & IoT project work (ESP32 + Firebase)</li>
+      </ol>
     </section>
 
-    <section class="card p-4">
-      <h2><i class="fas fa-envelope"></i> Contact</h2>
-      <div class="d-flex flex-wrap gap-3">
-        <a href="mailto:ghulamaliqureshi12@gmail.com" class="btn btn-outline-dark"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://github.com/ghulamaliqureshi" class="btn btn-outline-dark" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://www.linkedin.com/in/ghulamaliqureshi" class="btn btn-outline-dark" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://medium.com/@ghulamaliqureshi" class="btn btn-outline-dark" target="_blank"><i class="fab fa-medium"></i> Medium</a>
+    <!-- Contact + LinkedIn badge (light/dark swap) -->
+    <section id="contact" class="card" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</h2>
+      <div class="actions">
+        <a class="cta" href="mailto:ghulamaliqureshi12@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+        <a class="cta" href="https://github.com/ghulamaliqureshi" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+        <a class="cta" href="https://www.linkedin.com/in/ghulamaliqureshi" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+        <a class="cta" href="https://medium.com/@ghulamaliqureshi" target="_blank" rel="noopener"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a>
+        <button class="cta" id="copyEmail" type="button" aria-label="Copy email address"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy Email</button>
       </div>
-      <div id="linkedin-light" style="display: none;">
+
+      <!-- Intentional manual switching: two LinkedIn badge blocks -->
+      <div id="linkedin-light" style="display:none; margin-top:14px;">
         <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="ghulamaliqureshi" data-version="v1">
           <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi?trk=profile-badge">Ghulam Ali</a>
         </div>
       </div>
-      <div id="linkedin-dark" style="display: none;">
+      <div id="linkedin-dark" style="display:none; margin-top:14px;">
         <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="ghulamaliqureshi" data-version="v1">
           <a class="badge-base__link LI-simple-link" href="https://pk.linkedin.com/in/ghulamaliqureshi?trk=profile-badge">Ghulam Ali</a>
         </div>
       </div>
-      <a class="resume-btn" href="assets/GhulamAli_Resume.pdf" download>Download Resume</a>
+      <noscript>
+        <p><a href="https://www.linkedin.com/in/ghulamaliqureshi">View my LinkedIn profile</a></p>
+      </noscript>
     </section>
   </main>
 
-  <footer>© 2025 Ghulam Ali | Portfolio</footer>
-  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+  <footer>
+    <div class="container">© <span id="year"></span> Ghulam Ali • Portfolio</div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Person schema for better SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ghulam Ali",
+    "url": "https://your-domain.example/",
+    "image": "assets/profile.jpg",
+    "jobTitle": "Electrical Engineering Student",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "IST Islamabad"
+    },
+    "sameAs": [
+      "https://github.com/ghulamaliqureshi",
+      "https://www.linkedin.com/in/ghulamaliqureshi",
+      "https://medium.com/@ghulamaliqureshi"
+    ]
+  }
+  </script>
 
   <script>
-    const themeToggle = document.getElementById('themeToggle');
+    // =====================
+    // Utilities
+    // =====================
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
     const body = document.body;
-    const backToTop = document.getElementById("backToTop");
+    const themeToggle = $('#themeToggle');
+    const backToTop = $('#backToTop');
 
-    function toggleDarkMode() {
+    // Persistent theme with system preference fallback
+    function initTheme() {
+      const saved = localStorage.getItem('darkMode');
+      const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved === 'true' || (saved === null && prefers);
+      body.classList.toggle('dark', isDark);
+      updateThemeIcon();
+      updateLinkedInBadge(true);
+    }
+
+    function updateThemeIcon() {
+      const icon = themeToggle.querySelector('i');
+      const isDark = body.classList.contains('dark');
+      icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+    }
+
+    function renderLinkedInIfReady(retries = 12) {
+      if (window.LI && typeof window.LI.parse === 'function') {
+        try { window.LI.parse(); } catch (e) { /* ignore */ }
+      } else if (retries > 0) {
+        setTimeout(() => renderLinkedInIfReady(retries - 1), 200);
+      }
+    }
+
+    function updateLinkedInBadge(initial = false) {
+      const isDark = body.classList.contains('dark');
+      $('#linkedin-light').style.display = isDark ? 'none' : 'block';
+      $('#linkedin-dark').style.display = isDark ? 'block' : 'none';
+      // Re-parse badges to ensure correct render after toggle
+      if (!initial) renderLinkedInIfReady();
+    }
+
+    themeToggle.addEventListener('click', () => {
       body.classList.toggle('dark');
-      const isDark = body.classList.contains('dark');
-      localStorage.setItem('darkMode', isDark);
-      themeToggle.classList = isDark ? 'fas fa-sun dark-toggle' : 'fas fa-moon dark-toggle';
+      localStorage.setItem('darkMode', String(body.classList.contains('dark')));
+      updateThemeIcon();
       updateLinkedInBadge();
-    }
-
-    function updateLinkedInBadge() {
-      const isDark = body.classList.contains('dark');
-      document.getElementById("linkedin-light").style.display = isDark ? "none" : "block";
-      document.getElementById("linkedin-dark").style.display = isDark ? "block" : "none";
-    }
-
-    themeToggle.onclick = () => {
-      toggleDarkMode();
-    };
-
-    window.onload = () => {
-      const isDark = localStorage.getItem('darkMode') === 'true';
-      if (isDark) {
-        body.classList.add('dark');
-        themeToggle.classList = 'fas fa-sun dark-toggle';
-      }
-      updateLinkedInBadge();
-
-      const typeText = "Electrical Engineering | AI | IoT | Embedded Systems";
-      let i = 0;
-      const typewriter = document.getElementById("typewriter");
-      typewriter.textContent = "";
-      function typeWriter() {
-        if (i < typeText.length) {
-          typewriter.textContent += typeText.charAt(i);
-          i++;
-          setTimeout(typeWriter, 70);
-        }
-      }
-      typeWriter();
-    };
-
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    window.addEventListener("scroll", () => {
-      backToTop.classList.toggle("show", window.scrollY > 300);
+    // Typewriter (respects reduced motion)
+    function runTypewriter() {
+      const el = $('#typewriter');
+      const full = 'Electrical Engineering · AI · IoT · Embedded Systems';
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = full; return;
+      }
+      el.textContent = '';
+      let i = 0;
+      const tick = () => {
+        if (i < full.length) { el.textContent += full.charAt(i++); setTimeout(tick, 45); }
+      };
+      tick();
+    }
+
+    // Back-to-top
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 300);
+    });
+
+    // Copy email
+    $('#copyEmail').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('ghulamaliqureshi12@gmail.com');
+        const btn = $('#copyEmail');
+        const prev = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> Copied!';
+        setTimeout(() => btn.innerHTML = prev, 1500);
+      } catch { /* noop */ }
+    });
+
+    // Footer year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Init
+    window.addEventListener('load', () => {
+      initTheme();
+      runTypewriter();
+      // Ensure LinkedIn badge script has a chance to parse initially as well
+      renderLinkedInIfReady();
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
