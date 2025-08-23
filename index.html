@@ -8,7 +8,6 @@
   <meta name="author" content="Ghulam Ali" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   <link rel="canonical" href="https://your-domain.example/" />
-  <meta name="robots" content="index,follow" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
@@ -17,13 +16,13 @@
   <meta property="og:image" content="assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts & Icons (kept, but optimized) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-HK5fgLBL+xqv3Y3Zy7v2d7tL4Gm9xW4J4h6L4e1N3/8dQb2gW2S3JPG0x9p7c0M/7Q6pTqj3QJ2M3hHh5Z3kA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- LinkedIn badge script: async/defer (required for manual light/dark swap) -->
+  <!-- LinkedIn badge script: async/defer -->
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript" id="li-badge-script"></script>
 
   <style>
@@ -74,14 +73,6 @@
     a:hover { text-decoration: underline; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
-    /* Visually hidden for a11y-only text */
-    .visually-hidden {
-      position: absolute !important;
-      height: 1px; width: 1px;
-      overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
-      white-space: nowrap; border: 0; padding: 0; margin: -1px;
-    }
-
     /* Focus styles */
     :focus-visible {
       outline: 3px solid var(--ring);
@@ -90,7 +81,9 @@
     }
 
     /* Skip link */
-    .skip-link { position: absolute; left: -999px; top: -999px; }
+    .skip-link {
+      position: absolute; left: -999px; top: -999px;
+    }
     .skip-link:focus {
       left: 12px; top: 12px; z-index: 9999; background: var(--card);
       color: var(--fg); padding: 10px 14px; border-radius: 10px;
@@ -105,19 +98,13 @@
     .hero {
       display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: center;
     }
-    @media (max-width: 560px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-    }
     .avatar {
       width: 140px; height: 140px; border-radius: 50%;
       box-shadow: var(--shadow);
       border: 4px solid rgba(0,0,0,0.06);
-      object-fit: cover;
     }
     .title { margin: 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; }
     .subtitle { margin: 6px 0 0; color: var(--muted); font-size: clamp(14px, 2.1vw, 18px); }
-    nav.primary a { padding: 0 4px; }
-    nav.primary a[aria-current="page"] { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 
     /* Toolbar (theme + resume) */
     .toolbar {
@@ -139,8 +126,6 @@
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
     .cta:hover, .cta:focus-visible { background: var(--accent); color: #fff; }
-    /* keep border color stable on hover (esp. dark mode) */
-    body.dark .cta { border-color: var(--accent); }
 
     /* Sections */
     section { margin: 28px 0; }
@@ -156,27 +141,17 @@
     /* About */
     .about p { margin: 0; }
 
-    /* Projects — accessible accordions (collapsed by default) */
-    .projects-accordion { display: grid; gap: 12px; }
-    details.project {
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 14px; background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
-      padding: 4px 6px;
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) ); gap: 16px;
     }
-    body.dark details.project { background: #0f0f0f; border-color: rgba(255,255,255,0.08); }
-    details.project[open] { background: linear-gradient(180deg, rgba(0,0,0,0.04), transparent); }
-    summary.project-summary {
-      list-style: none; cursor: pointer; padding: 12px 14px; margin: 0;
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    .project {
+      border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px; background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
     }
-    summary.project-summary::-webkit-details-marker { display: none; }
-    .project-title { font-size: 18px; font-weight: 700; }
-    .project-meta { color: var(--muted); font-size: 14px; margin-top: 2px; }
-    .chevron { transition: transform .2s ease; }
-    details[open] .chevron { transform: rotate(180deg); }
+    .project h3 { margin: 0 0 6px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 14px; }
     .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(0,119,181,0.10); color: var(--accent); font-weight: 600; font-size: 12px; margin: 6px 6px 0 0; }
     body.dark .pill { background: rgba(0,191,255,0.12); color: #fff; }
-    .project-body { padding: 0 14px 14px 14px; }
 
     /* Skills */
     .skills { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -210,14 +185,6 @@
 
     /* Footer */
     footer { text-align: center; padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
-
-    /* Print styles (nice for resume prints) */
-    @media print {
-      .toolbar, .back-to-top { display: none !important; }
-      a { text-decoration: none; }
-      header { padding: 20px 0; }
-      .card { box-shadow: none; border-color: #e5e7eb; }
-    }
   </style>
 </head>
 <body>
@@ -225,15 +192,11 @@
 
   <!-- Toolbar: theme toggle + resume -->
   <div class="toolbar" role="group" aria-label="Quick actions">
-    <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode" aria-pressed="false">
+    <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
       <i class="fas fa-moon" aria-hidden="true"></i>
       <span class="visually-hidden">Toggle dark mode</span>
     </button>
-    <a class="cta" href="assets/GhulamAli_Resume.pdf" download rel="noopener" title="Download Resume (PDF)">
-      <i class="fa-regular fa-file" aria-hidden="true"></i>
-      <span class="visually-hidden">Download Resume</span>
-      Download Resume
-    </a>
+    <a class="cta" href="assets/GhulamAli_Resume.pdf" download rel="noopener">Download Resume</a>
   </div>
 
   <header>
@@ -244,7 +207,7 @@
         <p class="subtitle">
           <span id="typewriter" class="typewriter" aria-live="polite">Electrical Engineering · AI · IoT · Embedded Systems</span>
         </p>
-        <nav class="primary" aria-label="Primary">
+        <nav aria-label="Primary">
           <a href="#about">About</a> ·
           <a href="#projects">Projects</a> ·
           <a href="#skills">Skills</a> ·
@@ -264,60 +227,39 @@
       </p>
     </section>
 
-    <!-- Projects (accordions collapsed by default) -->
+    <!-- Projects -->
     <section id="projects" class="card" aria-labelledby="projects-title">
       <h2 class="section-title" id="projects-title"><i class="fas fa-diagram-project" aria-hidden="true"></i> Projects</h2>
-      <div class="projects-accordion">
-        <details class="project">
-          <summary class="project-summary">
-            <div>
-              <div class="project-title">Gas Sensor Monitoring</div>
-              <div class="project-meta">Real-time smoke monitoring with ESP32 + Firebase. Threshold alerts and historical graphs.</div>
-            </div>
-            <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
-          </summary>
-          <div class="project-body">
-            <div>
-              <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> ESP32</span>
-              <span class="pill"><i class="fa-solid fa-database" aria-hidden="true"></i> Firebase</span>
-              <span class="pill"><i class="fa-solid fa-flask" aria-hidden="true"></i> MQ2</span>
-            </div>
-            <p style="margin-top:8px"><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+      <div class="projects-grid">
+        <article class="project" aria-labelledby="p1-title">
+          <h3 id="p1-title">Gas Sensor Monitoring</h3>
+          <p class="meta">Real-time smoke monitoring with ESP32 + Firebase. Threshold alerts and historical graphs.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> ESP32</span>
+            <span class="pill"><i class="fa-solid fa-database" aria-hidden="true"></i> Firebase</span>
+            <span class="pill"><i class="fa-solid fa-flask" aria-hidden="true"></i> MQ2</span>
           </div>
-        </details>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
 
-        <details class="project">
-          <summary class="project-summary">
-            <div>
-              <div class="project-title">Push-to-Make/Break Switch</div>
-              <div class="project-meta">Functional hardware circuit with debouncing and protection.</div>
-            </div>
-            <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
-          </summary>
-          <div class="project-body">
-            <div>
-              <span class="pill"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Circuit Design</span>
-            </div>
-            <p style="margin-top:8px"><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        <article class="project" aria-labelledby="p2-title">
+          <h3 id="p2-title">Push-to-Make/Break Switch</h3>
+          <p class="meta">Functional hardware circuit with debouncing and protection.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Circuit Design</span>
           </div>
-        </details>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
 
-        <details class="project">
-          <summary class="project-summary">
-            <div>
-              <div class="project-title">Cricket Scoreboard</div>
-              <div class="project-meta">One-over scorer using microcontroller and LED display.</div>
-            </div>
-            <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
-          </summary>
-          <div class="project-body">
-            <div>
-              <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> MCU</span>
-              <span class="pill"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> LED Matrix</span>
-            </div>
-            <p style="margin-top:8px"><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        <article class="project" aria-labelledby="p3-title">
+          <h3 id="p3-title">Cricket Scoreboard</h3>
+          <p class="meta">One-over scorer using microcontroller and LED display.</p>
+          <div>
+            <span class="pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> MCU</span>
+            <span class="pill"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> LED Matrix</span>
           </div>
-        </details>
+          <p><a href="#" rel="noopener" target="_blank">View on GitHub</a></p>
+        </article>
       </div>
     </section>
 
@@ -346,7 +288,7 @@
       </ol>
     </section>
 
-    <!-- Contact + LinkedIn badge (manual light/dark swap preserved) -->
+    <!-- Contact + LinkedIn badge (light/dark swap) -->
     <section id="contact" class="card" aria-labelledby="contact-title">
       <h2 class="section-title" id="contact-title"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</h2>
       <div class="actions">
@@ -431,7 +373,6 @@
       themeToggle.setAttribute('aria-pressed', String(isDark));
     }
 
-    // LinkedIn badge re-render (manual switch blocks)
     function renderLinkedInIfReady(retries = 12) {
       if (window.LI && typeof window.LI.parse === 'function') {
         try { window.LI.parse(); } catch (e) { /* ignore */ }
@@ -454,17 +395,6 @@
       updateThemeIcon();
       updateLinkedInBadge();
     });
-
-    // Nav current section highlight (progressive enhancement)
-    const sections = ['about','projects','skills','timeline','contact'];
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const id = entry.target.id;
-        const link = document.querySelector(`nav.primary a[href="#${id}"]`);
-        if (link) link.setAttribute('aria-current', entry.isIntersecting ? 'page' : 'false');
-      });
-    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
-    sections.forEach(id => observer.observe(document.getElementById(id)));
 
     // Typewriter (respects reduced motion)
     function runTypewriter() {
