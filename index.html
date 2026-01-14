@@ -1,72 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =====================
-       META / SEO
-  ====================== -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ghulam Ali | Electrical Engineering Portfolio</title>
+  <!-- ================= META ================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghulam Ali — Embedded & Intelligent Systems Engineer</title>
 
-  <meta name="description" content="Portfolio of Ghulam Ali — Electrical Engineering student specializing in Embedded Systems, Edge AI, IoT, and Autonomous Systems." />
-  <meta name="author" content="Ghulam Ali" />
-  <link rel="canonical" href="https://ghulamali.dev/" />
+  <meta name="description" content="Ghulam Ali — Electrical Engineering student focused on Embedded Systems, Edge AI, IoT, and Autonomous Platforms.">
+  <meta name="author" content="Ghulam Ali">
+  <link rel="canonical" href="https://ghulamali.dev">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Ghulam Ali | Electrical Engineering Portfolio" />
-  <meta property="og:description" content="Embedded Systems · Edge AI · IoT · Autonomous SAR Drones" />
-  <meta property="og:image" content="assets/og-image.jpg" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico" />
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- ================= FONTS & ICONS ================= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    /* =====================
-       DESIGN TOKENS
-    ====================== */
+    /* =====================================================
+       DESIGN SYSTEM — ENGINEERING STYLE
+    ===================================================== */
     :root {
-      --bg: #f5f7fa;
-      --fg: #111827;
-      --muted: #6b7280;
+      --bg: #0b0d10;
+      --fg: #e5e7eb;
+      --muted: #9ca3af;
+      --card: #111318;
+      --border: rgba(255,255,255,.08);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,.15);
+      --radius: 14px;
+      --maxw: 1120px;
+      --shadow: 0 12px 40px rgba(0,0,0,.5);
+    }
+
+    /* Light mode */
+    body.light {
+      --bg: #f6f7f9;
+      --fg: #0f172a;
+      --muted: #475569;
       --card: #ffffff;
+      --border: rgba(0,0,0,.08);
       --accent: #0077b5;
-      --accent-strong: #005582;
-      --ring: rgba(0,119,181,.35);
-      --shadow: 0 12px 30px rgba(0,0,0,.08);
-      --radius: 16px;
-      --maxw: 1100px;
+      --accent-soft: rgba(0,119,181,.12);
     }
 
-    body.dark {
-      --bg: #000000;
-      --fg: #ffffff;
-      --muted: #cbd5e1;
-      --card: #0f0f0f;
-      --accent: #00bfff;
-      --ring: rgba(0,191,255,.4);
-    }
-
-    /* =====================
-       BASE / RESET
-    ====================== */
-    *, *::before, *::after { box-sizing: border-box; }
+    /* =====================================================
+       BASE
+    ===================================================== */
+    * { box-sizing: border-box; }
 
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: 'Poppins', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--fg);
-      line-height: 1.65;
-      transition: background .3s ease, color .3s ease;
+      line-height: 1.7;
+      transition: background .3s, color .3s;
     }
 
     a {
@@ -77,10 +68,7 @@
 
     a:hover { text-decoration: underline; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; }
 
     .container {
       max-width: var(--maxw);
@@ -88,381 +76,314 @@
       padding: 0 20px;
     }
 
-    /* Accessibility */
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--ring);
-      outline-offset: 3px;
-      border-radius: 8px;
-    }
-
-    /* =====================
-       SKIP LINK
-    ====================== */
-    .skip-link {
-      position: absolute;
-      left: -999px;
-      top: 10px;
-      background: var(--accent);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      z-index: 2000;
-    }
-
-    .skip-link:focus {
-      left: 10px;
-    }
-
-    /* =====================
+    /* =====================================================
        TOOLBAR
-    ====================== */
+    ===================================================== */
     .toolbar {
       position: fixed;
-      top: 16px;
-      right: 16px;
+      top: 20px;
+      right: 20px;
       display: flex;
       gap: 10px;
       z-index: 1000;
     }
 
-    .icon-btn, .cta {
-      border-radius: 999px;
+    .btn {
       padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--fg);
       font-weight: 600;
       cursor: pointer;
     }
 
-    .icon-btn {
-      background: var(--card);
-      border: 1px solid rgba(0,0,0,.1);
-      color: var(--fg);
-    }
-
-    .cta {
-      border: 2px solid var(--accent);
-      background: transparent;
+    .btn.primary {
+      border-color: var(--accent);
       color: var(--accent);
     }
 
-    .cta:hover {
+    .btn.primary:hover {
       background: var(--accent);
       color: #fff;
-      text-decoration: none;
     }
 
-    @media (max-width: 480px) {
-      .toolbar {
-        top: auto;
-        bottom: 16px;
-        right: 50%;
-        transform: translateX(50%);
-      }
-    }
-
-    /* =====================
+    /* =====================================================
        HERO
-    ====================== */
+    ===================================================== */
     header {
-      padding: 90px 0 50px;
+      padding: 120px 0 80px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 1fr;
       gap: 24px;
-      align-items: center;
+      max-width: 760px;
     }
 
-    .avatar {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      box-shadow: var(--shadow);
-    }
-
-    h1 {
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.15;
       margin: 0;
-      font-size: clamp(30px, 4vw, 44px);
     }
 
-    .subtitle {
+    .hero p {
       color: var(--muted);
-      margin: 8px 0 12px;
+      font-size: 18px;
+      max-width: 620px;
     }
 
-    nav a {
-      margin-right: 12px;
+    .hero-tags span {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      margin: 6px 6px 0 0;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    @media (max-width: 600px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      nav a {
-        display: inline-block;
-        margin-bottom: 6px;
-      }
-    }
-
-    /* =====================
-       SECTIONS / CARDS
-    ====================== */
+    /* =====================================================
+       SECTIONS
+    ===================================================== */
     section {
-      margin: 32px 0;
+      margin: 70px 0;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin-bottom: 18px;
     }
 
     .card {
       background: var(--card);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 26px;
       box-shadow: var(--shadow);
-      animation: fadeUp .6s ease both;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    /* =====================
-       PROJECTS
-    ====================== */
-    .projects-grid {
+    /* =====================================================
+       METRICS
+    ===================================================== */
+    .metrics {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 16px;
     }
 
-    .project {
-      border: 1px solid rgba(0,0,0,.08);
-      border-radius: 14px;
-      padding: 18px;
+    .metric strong {
+      font-size: 28px;
+      display: block;
     }
 
-    .pill {
-      display: inline-block;
-      background: rgba(0,119,181,.12);
-      color: var(--accent);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      margin: 6px 6px 0 0;
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    /* =====================
-       SKILLS
-    ====================== */
-    .skills-group { margin-bottom: 14px; }
-
-    .skill {
-      display: inline-block;
-      background: rgba(0,0,0,.06);
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin: 6px 6px 0 0;
+    /* =====================================================
+       PROJECTS
+    ===================================================== */
+    .projects {
+      display: grid;
+      gap: 20px;
     }
 
-    body.dark .skill { background: #151515; }
+    .project h3 {
+      margin-top: 0;
+    }
 
-    /* =====================
+    .project ul {
+      padding-left: 18px;
+      margin: 12px 0;
+    }
+
+    /* =====================================================
+       SKILLS GRID
+    ===================================================== */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 16px;
+    }
+
+    .skills strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* =====================================================
        FOOTER
-    ====================== */
+    ===================================================== */
     footer {
+      padding: 60px 0;
       text-align: center;
       color: var(--muted);
-      padding: 36px 0;
       font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding-top: 90px; }
     }
   </style>
 </head>
 
 <body>
-<a href="#about" class="skip-link">Skip to content</a>
 
-<!-- Toolbar -->
+<!-- ================= TOOLBAR ================= -->
 <div class="toolbar">
-  <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">
+  <button id="themeToggle" class="btn" aria-label="Toggle theme">
     <i class="fas fa-moon"></i>
   </button>
-  <a class="cta" href="assets/GhulamAli_Resume.pdf" download>Resume</a>
+  <a href="assets/GhulamAli_Resume.pdf" class="btn primary" download>Resume</a>
 </div>
 
+<!-- ================= HERO ================= -->
 <header>
   <div class="container hero">
-    <img src="assets/profile.jpg" alt="Portrait of Ghulam Ali" class="avatar" loading="lazy" />
-    <div>
-      <h1>Ghulam Ali</h1>
-      <p class="subtitle">
-        Electrical Engineering student focused on embedded systems, edge AI,
-        and intelligent hardware operating under real-world constraints.
-      </p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#research">Research</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <h1>
+      I build <span style="color:var(--accent)">embedded</span> &
+      <span style="color:var(--accent)">intelligent systems</span><br>
+      that work in the real world.
+    </h1>
+
+    <p>
+      I’m Ghulam Ali, an Electrical Engineering student focused on embedded systems,
+      edge AI, and autonomous platforms — where power, latency, and hardware limits
+      actually matter.
+    </p>
+
+    <div class="hero-tags">
+      <span>Embedded Systems</span>
+      <span>ESP32</span>
+      <span>Edge AI</span>
+      <span>IoT</span>
+      <span>Autonomous Drones</span>
     </div>
   </div>
 </header>
 
 <main class="container">
 
-<section id="about" class="card">
-  <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
-  <p>
-    I am a BE Electrical Engineering student at IST Islamabad with strong interests
-    in embedded systems, edge AI, and autonomous platforms. I focus on building
-    reliable systems under strict power, latency, and hardware constraints.
-  </p>
+<!-- ================= METRICS ================= -->
+<section class="metrics">
+  <div class="card metric">
+    <strong>300 ms</strong>
+    <span>End-to-end alert latency</span>
+  </div>
+  <div class="card metric">
+    <strong>2 Hz</strong>
+    <span>Real-time sensor sampling</span>
+  </div>
+  <div class="card metric">
+    <strong>30%</strong>
+    <span>False alert reduction</span>
+  </div>
+  <div class="card metric">
+    <strong>ESP32</strong>
+    <span>Primary embedded platform</span>
+  </div>
 </section>
 
-<section id="projects" class="card">
-  <h2 class="section-title"><i class="fas fa-diagram-project"></i> Projects</h2>
-  <div class="projects-grid">
+<!-- ================= PROJECTS ================= -->
+<section>
+  <h2 class="section-title">Selected Engineering Work</h2>
 
-    <div class="project">
-      <h3>Gas Sensor Monitoring (ESP32 + Firebase)</h3>
-      <p>Real-time gas detection system with cloud logging and alerting.</p>
+  <div class="projects">
+    <div class="card project">
+      <h3>Gas Monitoring System — ESP32 + Firebase</h3>
+      <p>
+        Designed and implemented a real-time gas detection system with cloud logging
+        and alerting.
+      </p>
       <ul>
-        <li>Sampling rate: 2 Hz</li>
-        <li>Alert latency: ~300 ms</li>
-        <li>False alerts reduced by ~30%</li>
+        <li>2 Hz sampling with calibrated baseline</li>
+        <li>~300 ms alert latency</li>
+        <li>Reduced false positives by ~30%</li>
       </ul>
-      <span class="pill">ESP32</span>
-      <span class="pill">Firebase</span>
-      <span class="pill">IoT</span>
     </div>
 
-    <div class="project">
-      <h3>Push-to-Make / Push-to-Break Switch</h3>
-      <p>Robust hardware switch design with debouncing and protection.</p>
-      <span class="pill">Circuit Design</span>
-      <span class="pill">Debouncing</span>
+    <div class="card project">
+      <h3>Hardware Switch Systems</h3>
+      <p>
+        Push-to-make and push-to-break circuits with proper debouncing,
+        pull-ups, and transient protection.
+      </p>
     </div>
 
-    <div class="project">
-      <h3>Cricket Scoreboard</h3>
-      <p>Microcontroller-based LED scoreboard for one-over matches.</p>
-      <span class="pill">MCU</span>
-      <span class="pill">LED Display</span>
+    <div class="card project">
+      <h3>Microcontroller-Based Cricket Scoreboard</h3>
+      <p>
+        LED display system for one-over matches using a custom MCU logic flow.
+      </p>
     </div>
-
   </div>
 </section>
 
-<section id="research" class="card">
-  <h2 class="section-title"><i class="fas fa-robot"></i> Research & FYP Interests</h2>
-  <ul>
-    <li>Autonomous Search & Rescue (SAR) drones</li>
-    <li>Edge-based YOLO victim detection</li>
-    <li>Sensor fusion (LiDAR + Vision)</li>
-    <li>Low-power AI inference on embedded hardware</li>
-  </ul>
-</section>
+<!-- ================= SKILLS ================= -->
+<section>
+  <h2 class="section-title">Technical Skill Set</h2>
 
-<section id="skills" class="card">
-  <h2 class="section-title"><i class="fas fa-cogs"></i> Skills</h2>
-
-  <div class="skills-group">
-    <strong>Programming</strong><br />
-    <span class="skill">C</span>
-    <span class="skill">C++</span>
-    <span class="skill">Python</span>
-  </div>
-
-  <div class="skills-group">
-    <strong>Embedded Systems</strong><br />
-    <span class="skill">ESP32</span>
-    <span class="skill">Arduino</span>
-    <span class="skill">UART / SPI / I2C</span>
-  </div>
-
-  <div class="skills-group">
-    <strong>AI & Vision</strong><br />
-    <span class="skill">OpenCV</span>
-    <span class="skill">YOLO</span>
-    <span class="skill">TensorFlow Lite</span>
+  <div class="skills">
+    <div class="card">
+      <strong>Programming</strong>
+      C · C++ · Python
+    </div>
+    <div class="card">
+      <strong>Embedded Systems</strong>
+      ESP32 · Arduino · UART · SPI · I2C
+    </div>
+    <div class="card">
+      <strong>AI & Vision</strong>
+      OpenCV · YOLO · TensorFlow Lite
+    </div>
+    <div class="card">
+      <strong>IoT & Cloud</strong>
+      Firebase · MQTT · REST APIs
+    </div>
   </div>
 </section>
 
-<section id="contact" class="card">
-  <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
-  <a class="cta" href="mailto:ghulamaliqureshi12@gmail.com">Email</a>
-  <a class="cta" href="https://github.com/ghulamaliqureshi" target="_blank" rel="noopener noreferrer">GitHub</a>
-  <a class="cta" href="https://www.linkedin.com/in/ghulamaliqureshi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<!-- ================= CONTACT ================= -->
+<section>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="card">
+    <p>
+      Interested in embedded systems, edge AI, or autonomous platforms?
+      Let’s talk.
+    </p>
+    <a href="mailto:ghulamaliqureshi12@gmail.com">Email</a> ·
+    <a href="https://github.com/ghulamaliqureshi" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/ghulamaliqureshi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
 </section>
 
 </main>
 
 <footer>
-  © <span id="year"></span> Ghulam Ali
+  © <span id="year"></span> Ghulam Ali — Built for clarity, not noise.
 </footer>
-
-<!-- Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ghulam Ali",
-  "jobTitle": "Electrical Engineering Student",
-  "affiliation": "IST Islamabad",
-  "sameAs": [
-    "https://github.com/ghulamaliqureshi",
-    "https://www.linkedin.com/in/ghulamaliqureshi"
-  ]
-}
-</script>
 
 <script>
   const body = document.body;
   const toggle = document.getElementById('themeToggle');
 
-  // System preference
-  if (!localStorage.getItem('darkMode')) {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      body.classList.add('dark');
-    }
+  if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    body.classList.add('light');
   }
-
-  // Stored preference
-  if (localStorage.getItem('darkMode') === 'true') {
-    body.classList.add('dark');
-  }
-
-  function updateIcon() {
-    toggle.innerHTML = body.classList.contains('dark')
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
-  }
-
-  updateIcon();
 
   toggle.onclick = () => {
-    body.classList.toggle('dark');
-    localStorage.setItem('darkMode', body.classList.contains('dark'));
-    updateIcon();
+    body.classList.toggle('light');
+    toggle.innerHTML = body.classList.contains('light')
+      ? '<i class="fas fa-moon"></i>'
+      : '<i class="fas fa-sun"></i>';
   };
 
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
 </body>
 </html>
