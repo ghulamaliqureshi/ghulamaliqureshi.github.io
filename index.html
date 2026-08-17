@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ghulam Ali — Embedded & Intelligent Systems</title>
-  <meta name="description" content="Ghulam Ali — EE student at IST. Embedded Systems, Edge AI, IoT, Autonomous Drones.">
+  <meta name="description" content="Ghulam Ali — Electrical Engineering student at IST. Embedded systems, edge AI, vision-guided tracking, IoT.">
   <meta name="author" content="Ghulam Ali">
+  <meta property="og:title" content="Ghulam Ali — Embedded & Intelligent Systems">
+  <meta property="og:description" content="Electrical Engineering student at IST building embedded systems, edge AI, and vision-guided tracking platforms.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23060709'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%2363cab7' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    /* ═══════════════════════════════════════════
-       TOKENS
-    ═══════════════════════════════════════════ */
     :root {
       --bg:        #060709;
       --surface:   #0d0f14;
@@ -27,7 +28,6 @@
       --sub:       #404550;
       --accent:    #63cab7;
       --accent2:   #f97316;
-      --red:       #ef4444;
       --glow:      rgba(99,202,183,.18);
       --font-display: 'Syne', sans-serif;
       --font-body:    'DM Sans', sans-serif;
@@ -50,9 +50,6 @@
       --glow:      rgba(0,140,120,.12);
     }
 
-    /* ═══════════════════════════════════════════
-       RESET
-    ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -65,9 +62,6 @@
       cursor: none;
     }
 
-    /* ═══════════════════════════════════════════
-       CUSTOM CURSOR
-    ═══════════════════════════════════════════ */
     #cursor {
       position: fixed;
       width: 10px; height: 10px;
@@ -92,9 +86,6 @@
     }
     a:hover ~ #cursor, button:hover ~ #cursor { width: 20px; height: 20px; }
 
-    /* ═══════════════════════════════════════════
-       NOISE OVERLAY
-    ═══════════════════════════════════════════ */
     #noise {
       position: fixed; inset: 0;
       pointer-events: none; z-index: 1;
@@ -102,9 +93,6 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     }
 
-    /* ═══════════════════════════════════════════
-       GRID LINES (decorative)
-    ═══════════════════════════════════════════ */
     #grid-bg {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
@@ -115,9 +103,6 @@
       opacity: .6;
     }
 
-    /* ═══════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════ */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 100;
@@ -199,9 +184,6 @@
       color: #000;
     }
 
-    /* ═══════════════════════════════════════════
-       LAYOUT
-    ═══════════════════════════════════════════ */
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
@@ -209,9 +191,6 @@
       position: relative; z-index: 2;
     }
 
-    /* ═══════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════ */
     #hero {
       min-height: 100svh;
       display: flex; align-items: center;
@@ -220,7 +199,6 @@
       overflow: hidden;
     }
 
-    /* glow blob */
     #hero::before {
       content: '';
       position: absolute;
@@ -238,10 +216,8 @@
     }
 
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+      display: block;
+      max-width: 640px;
       width: 100%;
     }
 
@@ -337,47 +313,6 @@
       transform: translateY(-2px);
     }
 
-    /* right column — stat ticker */
-    .hero-stats {
-      display: flex; flex-direction: column; gap: 2px;
-    }
-    .stat-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 22px;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      background: var(--surface);
-      transition: border-color .25s, transform .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, var(--glow), transparent);
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    .stat-item:hover { border-color: var(--border-hi); transform: translateX(4px); }
-    .stat-item:hover::before { opacity: 1; }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .08em;
-    }
-    .stat-val {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    /* status badge */
     .status-badge {
       display: inline-flex; align-items: center; gap: 8px;
       margin-top: 28px;
@@ -398,9 +333,6 @@
       50% { opacity: .3; }
     }
 
-    /* ═══════════════════════════════════════════
-       SECTION TEMPLATE
-    ═══════════════════════════════════════════ */
     .section {
       padding: 110px 0;
       border-top: 1px solid var(--border);
@@ -435,9 +367,6 @@
       margin: 0 32px 10px;
     }
 
-    /* ═══════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════ */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -495,9 +424,6 @@
     }
     .pill:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ═══════════════════════════════════════════
-       PROJECTS
-    ═══════════════════════════════════════════ */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
@@ -579,7 +505,6 @@
       flex: 1;
     }
 
-    /* metrics strip inside card */
     .proj-metrics {
       display: flex; gap: 20px;
       margin-top: 20px;
@@ -605,9 +530,6 @@
       margin-top: 16px;
     }
 
-    /* ═══════════════════════════════════════════
-       SKILLS
-    ═══════════════════════════════════════════ */
     .skills-layout {
       display: grid;
       grid-template-columns: 1fr 2fr;
@@ -674,112 +596,6 @@
       transition: width 1s var(--ease);
     }
 
-    /* ═══════════════════════════════════════════
-       PUBLICATION
-    ═══════════════════════════════════════════ */
-    .pub-card {
-      background: var(--surface);
-      border: 1px solid var(--border-hi);
-      border-radius: 14px;
-      padding: 32px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .pub-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--glow), transparent 60%);
-      pointer-events: none;
-    }
-    .pub-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .14em;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-    .pub-card h3 {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      margin-bottom: 10px;
-    }
-    .pub-card p { font-size: 14px; color: var(--muted); }
-    .pub-venue {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      margin-top: 14px;
-    }
-    .pub-icon {
-      font-size: 48px;
-      color: var(--accent);
-      opacity: .25;
-    }
-
-    /* ═══════════════════════════════════════════
-       TIMELINE
-    ═══════════════════════════════════════════ */
-    .timeline {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 15px; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-    }
-
-    .tl-item {
-      display: flex; gap: 32px;
-      padding: 0 0 40px 0;
-      position: relative;
-    }
-
-    .tl-dot {
-      position: relative; z-index: 1;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-top: 4px;
-      font-size: 10px;
-      color: var(--accent);
-    }
-
-    .tl-body {
-      flex: 1;
-    }
-    .tl-date {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--sub);
-      letter-spacing: .08em;
-      margin-bottom: 4px;
-    }
-    .tl-title {
-      font-family: var(--font-display);
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .tl-desc { font-size: 14px; color: var(--muted); }
-
-    /* ═══════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════ */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -837,9 +653,6 @@
     }
     .contact-link:hover i.arrow { transform: translateX(3px); color: var(--accent); }
 
-    /* ═══════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════ */
     footer {
       border-top: 1px solid var(--border);
       padding: 36px 0;
@@ -855,9 +668,6 @@
     }
     .footer-copy span { color: var(--accent); }
 
-    /* ═══════════════════════════════════════════
-       SCROLL ANIMATIONS
-    ═══════════════════════════════════════════ */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -872,14 +682,32 @@
     .reveal-delay-3 { transition-delay: .3s; }
     .reveal-delay-4 { transition-delay: .4s; }
 
-    /* ═══════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════ */
+    a:focus-visible, button:focus-visible, .skill-tab:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001s !important;
+        scroll-behavior: auto !important;
+      }
+      #cursor, #cursor-ring { display: none !important; }
+      body { cursor: auto; }
+    }
+
+    @media (pointer: coarse) {
+      #cursor, #cursor-ring { display: none; }
+      body { cursor: auto; }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       .wrap { padding: 0 20px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
       .about-grid { grid-template-columns: 1fr; }
       .skills-layout { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -890,7 +718,6 @@
       body { cursor: auto; }
     }
 
-    /* hero entrance */
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: none; }
@@ -900,19 +727,16 @@
     .hero-desc    { animation: fade-up .6s .5s both; }
     .hero-cta     { animation: fade-up .6s .65s both; }
     .status-badge { animation: fade-up .6s .8s both; }
-    .hero-stats   { animation: fade-up .6s .55s both; }
   </style>
 </head>
 
 <body>
 
-<!-- Cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 <div id="noise"></div>
 <div id="grid-bg"></div>
 
-<!-- ═══════════════════ NAV ═══════════════════ -->
 <nav>
   <a class="nav-logo" href="#hero">G<span>.</span>Ali</a>
 
@@ -920,7 +744,6 @@
     <li><a href="#about">about</a></li>
     <li><a href="#projects">projects</a></li>
     <li><a href="#skills">skills</a></li>
-    <li><a href="#research">research</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
 
@@ -934,12 +757,10 @@
   </div>
 </nav>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
 <section id="hero">
   <div class="wrap">
     <div class="hero-inner">
 
-      <!-- Left -->
       <div>
         <div class="hero-eyebrow">IST ISLAMABAD · EE STUDENT</div>
 
@@ -951,8 +772,8 @@
 
         <p class="hero-desc">
           I'm <strong>Ghulam Ali</strong> — an Electrical Engineering student
-          building embedded systems, autonomous drones, and IoT platforms
-          where hardware constraints, latency, and power actually matter.
+          building embedded systems, vision-guided tracking platforms, and IoT
+          devices where hardware constraints, latency, and power actually matter.
         </p>
 
         <div class="hero-cta">
@@ -970,35 +791,10 @@
         </div>
       </div>
 
-      <!-- Right — stats -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-label">ALERT LATENCY</div>
-          <div class="stat-val">~300 ms</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">SENSOR SAMPLING RATE</div>
-          <div class="stat-val">2 Hz</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">FALSE ALERT REDUCTION</div>
-          <div class="stat-val">30%</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">PUBLISHED PAPERS</div>
-          <div class="stat-val">1</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">PRIMARY PLATFORM</div>
-          <div class="stat-val">ESP32</div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ ABOUT ═══════════════════ -->
 <section id="about" class="section">
   <div class="wrap">
 
@@ -1013,20 +809,18 @@
     <div class="about-grid">
       <div class="about-text reveal reveal-delay-1">
         <p>
-          I'm a <strong>6th-semester Electrical Engineering student</strong> at the 
+          I'm a <strong>junior year Electrical Engineering student</strong> at the 
           Institute of Space Technology, Islamabad. My work sits at the intersection 
           of embedded hardware and intelligent software — designing systems that 
           make real decisions in real time on constrained devices.
         </p>
         <p>
-          My FYP is an <strong>autonomous SAR drone</strong> integrating AI, LiDAR, 
-          and IoT for search-and-rescue operations — the kind of system where 
-          a bad latency number costs lives. I've worked through the full stack: 
-          from hardware-level SPI/UART protocols on ESP32 to cloud dashboards on Firebase.
-        </p>
-        <p>
-          Longer term, I'm targeting an <strong>MS in Germany</strong> (TUM, RWTH Aachen, 
-          TU Berlin) — focused on embedded AI and autonomous systems.
+          My FYP is a <strong>vision-assisted Pointing and Tracking (PAT) system</strong> 
+          for indoor laser communication links — using a camera to re-find and 
+          re-point a laser transmitter whenever the link is disturbed or the 
+          receiver moves, with a gimbal keeping the beam locked on target. I've 
+          worked through the full stack: from hardware-level SPI/UART protocols 
+          on ESP32 to cloud dashboards on Firebase.
         </p>
 
         <div style="margin-top:28px">
@@ -1046,22 +840,18 @@
           <span class="info-val">Institute of Space Technology, Islamabad</span>
         </div>
         <div class="info-row">
-          <span class="info-key">SEMESTER</span>
-          <span class="info-val">6th (89 credit hours completed)</span>
+          <span class="info-key">EXPERIENCE</span>
+          <span class="info-val">Research Assistant, IST Communications Lab (under Dr Amena Ejaz Aziz)</span>
         </div>
         <div class="info-row">
           <span class="info-key">INTERESTS</span>
           <span class="info-val">
             <span class="pill">Embedded AI</span>
             <span class="pill">IoT</span>
-            <span class="pill">Drone Systems</span>
+            <span class="pill">Laser Comms</span>
             <span class="pill">Edge Computing</span>
             <span class="pill">VLC</span>
           </span>
-        </div>
-        <div class="info-row">
-          <span class="info-key">GOAL</span>
-          <span class="info-val">MS Germany — TUM / RWTH Aachen / TU Berlin</span>
         </div>
         <div class="info-row">
           <span class="info-key">STATUS</span>
@@ -1075,7 +865,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════ PROJECTS ═══════════════════ -->
 <section id="projects" class="section">
   <div class="wrap">
 
@@ -1089,33 +878,32 @@
 
     <div class="projects-grid">
 
-      <!-- Featured -->
       <div class="proj-card featured reveal reveal-delay-1">
         <div class="proj-top">
-          <div class="proj-icon"><i class="fas fa-drone-alt"></i>🛸</div>
+          <div class="proj-icon">🎯</div>
           <span class="proj-badge">FYP · IN PROGRESS</span>
         </div>
-        <h3>Autonomous SAR Drone — AI + LiDAR + IoT</h3>
+        <h3>Vision-Assisted Pointing & Tracking for Laser Comms</h3>
         <p>
-          Final Year Project: a search-and-rescue drone capable of autonomous 
-          navigation, obstacle avoidance via LiDAR, real-time victim detection 
-          using edge AI (YOLO on embedded hardware), and live mission telemetry 
-          streamed over IoT to a ground station. Designed for GPS-denied, 
-          low-visibility environments where every millisecond matters.
+          Final Year Project: an indoor Pointing and Tracking (PAT) system that keeps 
+          a free-space laser communication link alive. Phase 1 uses a camera to 
+          re-locate a stationary receiver and re-point the transmitter whenever the 
+          link is disturbed, resuming communication from where it dropped. Phase 2 
+          extends this to a moving receiver, with a gimbal on the transmitter 
+          tracking and locking the beam onto the target in real time.
         </p>
         <div class="proj-metrics">
-          <div class="proj-metric"><strong>LiDAR</strong><span>OBSTACLE DETECT</span></div>
-          <div class="proj-metric"><strong>YOLO</strong><span>EDGE INFERENCE</span></div>
-          <div class="proj-metric"><strong>IoT</strong><span>LIVE TELEMETRY</span></div>
+          <div class="proj-metric"><strong>15 m</strong><span>LINK RANGE</span></div>
+          <div class="proj-metric"><strong>2</strong><span>RASPBERRY PIs</span></div>
+          <div class="proj-metric"><strong>Red</strong><span>LASER CHANNEL</span></div>
         </div>
         <div class="proj-tags">
-          <span class="pill">ESP32</span><span class="pill">LiDAR</span>
-          <span class="pill">OpenCV</span><span class="pill">YOLO</span>
-          <span class="pill">Firebase</span><span class="pill">MQTT</span>
+          <span class="pill">Raspberry Pi</span><span class="pill">OpenCV</span>
+          <span class="pill">Gimbal Control</span><span class="pill">Laser Comms</span>
+          <span class="pill">Python</span>
         </div>
       </div>
 
-      <!-- Gas monitoring -->
       <div class="proj-card reveal reveal-delay-2">
         <div class="proj-top">
           <div class="proj-icon">🌡️</div>
@@ -1139,17 +927,16 @@
         </div>
       </div>
 
-      <!-- VLC -->
       <div class="proj-card reveal reveal-delay-3">
         <div class="proj-top">
           <div class="proj-icon">💡</div>
-          <span class="proj-badge">PUBLISHED</span>
+          <span class="proj-badge">COMPLETE</span>
         </div>
-        <h3>Hybrid VLC + Wi-Fi Communication — ICAST</h3>
+        <h3>Hybrid VLC + Wi-Fi Communication</h3>
         <p>
           ESP32-based Visible Light Communication system with XOR 
-          encryption, seamlessly switching to Wi-Fi fallback. 
-          Research published at ICAST conference.
+          encryption, seamlessly switching to Wi-Fi fallback whenever 
+          the optical channel drops.
         </p>
         <div class="proj-tags">
           <span class="pill">ESP32</span><span class="pill">VLC</span>
@@ -1157,7 +944,6 @@
         </div>
       </div>
 
-      <!-- UART SPI -->
       <div class="proj-card reveal reveal-delay-4">
         <div class="proj-top">
           <div class="proj-icon">⚡</div>
@@ -1179,7 +965,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════ SKILLS ═══════════════════ -->
 <section id="skills" class="section">
   <div class="wrap">
 
@@ -1253,81 +1038,15 @@
   </div>
 </section>
 
-<!-- ═══════════════════ RESEARCH ═══════════════════ -->
-<section id="research" class="section">
-  <div class="wrap">
-
-    <div class="sec-header reveal">
-      <div>
-        <div class="sec-num">04 / RESEARCH</div>
-        <h2 class="sec-title">Published work.</h2>
-      </div>
-      <div class="sec-line"></div>
-    </div>
-
-    <div class="pub-card reveal reveal-delay-1">
-      <div>
-        <div class="pub-label">CONFERENCE PAPER · ICAST</div>
-        <h3>Hybrid VLC and Wi-Fi Communication System with XOR Encryption</h3>
-        <p>
-          Designed and implemented a dual-mode optical-RF communication system on ESP32, 
-          leveraging Visible Light Communication as a primary channel with Wi-Fi fallback. 
-          XOR-based encryption layer applied at the hardware abstraction level. 
-          Demonstrated stable data transfer under ambient light interference conditions.
-        </p>
-        <div class="pub-venue">Presented at ICAST · Institute of Space Technology</div>
-      </div>
-      <i class="fas fa-file-alt pub-icon"></i>
-    </div>
-
-    <!-- Timeline of what's coming -->
-    <div style="margin-top: 56px;">
-      <div class="sec-num reveal" style="margin-bottom:24px">ROADMAP</div>
-      <div class="timeline">
-        <div class="tl-item reveal reveal-delay-1">
-          <div class="tl-dot"><i class="fas fa-check"></i></div>
-          <div class="tl-body">
-            <div class="tl-date">2024</div>
-            <div class="tl-title">VLC Paper — ICAST</div>
-            <div class="tl-desc">First publication. Hybrid optical-RF comms with encryption.</div>
-          </div>
-        </div>
-        <div class="tl-item reveal reveal-delay-2">
-          <div class="tl-dot" style="border-color: var(--accent2); color: var(--accent2);">
-            <i class="fas fa-spinner"></i>
-          </div>
-          <div class="tl-body">
-            <div class="tl-date">2025–2026</div>
-            <div class="tl-title">SAR Drone FYP + Research Paper</div>
-            <div class="tl-desc">Autonomous navigation + edge AI inference. Target: IEEE or Springer venue.</div>
-          </div>
-        </div>
-        <div class="tl-item reveal reveal-delay-3">
-          <div class="tl-dot" style="border-color: var(--sub); color: var(--sub);">
-            <i class="fas fa-circle"></i>
-          </div>
-          <div class="tl-body">
-            <div class="tl-date">Oct 2027</div>
-            <div class="tl-title">MS Germany Matriculation</div>
-            <div class="tl-desc">Target: TUM / RWTH Aachen / TU Berlin — Embedded Systems or AI.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
 <section id="contact" class="section">
   <div class="wrap">
 
     <div class="contact-grid">
       <div class="contact-text reveal">
-        <div class="sec-num" style="margin-bottom:14px">05 / CONTACT</div>
+        <div class="sec-num" style="margin-bottom:14px">04 / CONTACT</div>
         <h2>Let's build<br>something real.</h2>
         <p style="margin-top:16px;">
-          Interested in embedded systems, edge AI, drone platforms, 
+          Interested in embedded systems, edge AI, vision-guided tracking, 
           or just want to discuss research? My inbox is open.
         </p>
       </div>
@@ -1365,7 +1084,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-copy">
@@ -1378,36 +1096,43 @@
 </footer>
 
 <script>
-  /* ── Cursor ── */
-  const cur  = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function loop() {
-    rx += (mx - rx) * .12;
-    ry += (my - ry) * .12;
-    cur.style.left  = mx + 'px';
-    cur.style.top   = my + 'px';
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(loop);
-  })();
+  const wantsCustomCursor = window.matchMedia('(pointer: fine)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const interactables = document.querySelectorAll('a, button, .skill-tab, .proj-card');
-  interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cur.style.transform  = 'translate(-50%,-50%) scale(2.5)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
-      ring.style.opacity   = '.3';
-    });
-    el.addEventListener('mouseleave', () => {
-      cur.style.transform  = 'translate(-50%,-50%) scale(1)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.opacity   = '.6';
-    });
-  });
+  if (wantsCustomCursor) {
+    const cur  = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function loop() {
+      rx += (mx - rx) * .12;
+      ry += (my - ry) * .12;
+      cur.style.left  = mx + 'px';
+      cur.style.top   = my + 'px';
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
 
-  /* ── Theme ── */
+    const interactables = document.querySelectorAll('a, button, .skill-tab, .proj-card');
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cur.style.transform  = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
+        ring.style.opacity   = '.3';
+      });
+      el.addEventListener('mouseleave', () => {
+        cur.style.transform  = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.opacity   = '.6';
+      });
+    });
+  } else {
+    document.getElementById('cursor').style.display = 'none';
+    document.getElementById('cursor-ring').style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+
   const body = document.body;
   const icon = document.getElementById('theme-icon');
   if (window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -1419,16 +1144,13 @@
     icon.className = body.classList.contains('light') ? 'fas fa-sun' : 'fas fa-moon';
   };
 
-  /* ── Year ── */
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ── Scroll reveal ── */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* ── Skill tabs ── */
   document.querySelectorAll('.skill-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
@@ -1439,7 +1161,6 @@
     });
   });
 
-  /* ── Skill bars ── */
   function animateBars() {
     document.querySelectorAll('.skill-bar-fill').forEach(bar => {
       bar.style.width = '0';
@@ -1447,7 +1168,6 @@
     });
   }
 
-  /* trigger bars on skill section enter */
   const skillsEl = document.getElementById('skills');
   let barsAnimated = false;
   const barObs = new IntersectionObserver(entries => {
