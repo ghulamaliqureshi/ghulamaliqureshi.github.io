@@ -6,6 +6,9 @@
   <title>Ghulam Ali — Embedded & Intelligent Systems</title>
   <meta name="description" content="Ghulam Ali — Electrical Engineering student at IST. Embedded systems, edge AI, vision-guided tracking, IoT.">
   <meta name="author" content="Ghulam Ali">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#060709">
+  <link rel="canonical" href="https://ghulamaliqureshi.dev/">
   <meta property="og:title" content="Ghulam Ali — Embedded & Intelligent Systems">
   <meta property="og:description" content="Electrical Engineering student at IST building embedded systems, edge AI, and vision-guided tracking platforms.">
   <meta property="og:type" content="website">
@@ -62,6 +65,21 @@
       cursor: none;
     }
 
+    .skip-link {
+      position: fixed;
+      top: -60px; left: 12px;
+      z-index: 10000;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      text-decoration: none;
+      transition: top .2s var(--ease);
+    }
+    .skip-link:focus { top: 12px; }
+
     #cursor {
       position: fixed;
       width: 10px; height: 10px;
@@ -71,7 +89,6 @@
       z-index: 9999;
       transform: translate(-50%,-50%);
       transition: width .2s, height .2s, background .2s;
-      mix-blend-mode: screen;
     }
     #cursor-ring {
       position: fixed;
@@ -183,6 +200,68 @@
       background: var(--accent);
       color: #000;
     }
+
+    /* Mobile nav burger + panel */
+    .nav-burger {
+      display: none;
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      background: transparent;
+      border-radius: 8px;
+      color: var(--fg);
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100svh;
+      width: min(78vw, 320px);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 200;
+      transform: translateX(100%);
+      transition: transform .35s var(--ease);
+      display: flex; flex-direction: column;
+      padding: 24px;
+      gap: 4px;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .mobile-menu-close {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      background: transparent;
+      border-radius: 8px;
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .mobile-menu a {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--fg);
+      text-decoration: none;
+      padding: 14px 6px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: .04em;
+    }
+    .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--accent); }
+
+    .mobile-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s var(--ease);
+    }
+    .mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
     .wrap {
       max-width: 1100px;
@@ -484,7 +563,7 @@
       font-size: 10px;
       letter-spacing: .1em;
       color: var(--accent);
-      background: var(--accent-soft, rgba(99,202,183,.1));
+      background: rgba(99,202,183,.1);
       padding: 4px 10px;
       border-radius: 999px;
       border: 1px solid var(--border-hi);
@@ -546,17 +625,21 @@
       border-radius: var(--r);
       cursor: pointer;
       border: 1px solid transparent;
+      background: transparent;
+      width: 100%;
+      text-align: left;
       transition: background .2s, border-color .2s;
+      font-family: var(--font-body);
       font-size: 14px;
       color: var(--muted);
     }
     .skill-tab i { width: 16px; text-align: center; }
-    .skill-tab:hover, .skill-tab.active {
+    .skill-tab:hover, .skill-tab[aria-selected="true"] {
       background: var(--surface);
       border-color: var(--border);
       color: var(--fg);
     }
-    .skill-tab.active { border-color: var(--border-hi); color: var(--accent); }
+    .skill-tab[aria-selected="true"] { border-color: var(--border-hi); color: var(--accent); }
 
     .skill-panels { position: relative; }
 
@@ -707,6 +790,7 @@
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
+      .nav-burger { display: flex; }
       .wrap { padding: 0 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .skills-layout { grid-template-columns: 1fr; }
@@ -732,10 +816,12 @@
 
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div id="noise"></div>
-<div id="grid-bg"></div>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="noise" aria-hidden="true"></div>
+<div id="grid-bg" aria-hidden="true"></div>
 
 <nav>
   <a class="nav-logo" href="#hero">G<span>.</span>Ali</a>
@@ -748,14 +834,33 @@
   </ul>
 
   <div class="nav-actions">
-    <button id="themeToggle" class="btn-ghost" aria-label="Toggle theme">
-      <i class="fas fa-moon" id="theme-icon"></i>
+    <button id="themeToggle" class="btn-ghost" aria-label="Toggle light and dark theme">
+      <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
     </button>
     <a href="assets/GhulamAli_Resume.pdf" class="btn-accent" download>
-      <i class="fas fa-download"></i> Resume
+      <i class="fas fa-download" aria-hidden="true"></i> Resume
     </a>
+    <button id="navBurger" class="nav-burger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
   </div>
 </nav>
+
+<div id="mobileOverlay" class="mobile-overlay"></div>
+<div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="mobile-menu-top">
+    <span class="nav-logo">G<span style="color:var(--accent)">.</span>Ali</span>
+    <button id="mobileMenuClose" class="mobile-menu-close" aria-label="Close navigation menu">
+      <i class="fas fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+  <a href="#about">about</a>
+  <a href="#projects">projects</a>
+  <a href="#skills">skills</a>
+  <a href="#contact">contact</a>
+</div>
+
+<main id="main">
 
 <section id="hero">
   <div class="wrap">
@@ -778,7 +883,7 @@
 
         <div class="hero-cta">
           <a href="#projects" class="btn-primary">
-            View my work <i class="fas fa-arrow-right"></i>
+            View my work <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
           <a href="#contact" class="btn-outline">
             Let's talk
@@ -786,7 +891,7 @@
         </div>
 
         <div class="status-badge">
-          <span class="status-dot"></span>
+          <span class="status-dot" aria-hidden="true"></span>
           Available for research collaborations & FYP partnerships
         </div>
       </div>
@@ -809,23 +914,23 @@
     <div class="about-grid">
       <div class="about-text reveal reveal-delay-1">
         <p>
-          I'm a <strong>junior year Electrical Engineering student</strong> at the 
-          Institute of Space Technology, Islamabad. My work sits at the intersection 
-          of embedded hardware and intelligent software — designing systems that 
+          I'm a <strong>junior year Electrical Engineering student</strong> at the
+          Institute of Space Technology, Islamabad. My work sits at the intersection
+          of embedded hardware and intelligent software — designing systems that
           make real decisions in real time on constrained devices.
         </p>
         <p>
-          My FYP is a <strong>vision-assisted Pointing and Tracking (PAT) system</strong> 
-          for indoor laser communication links — using a camera to re-find and 
-          re-point a laser transmitter whenever the link is disturbed or the 
-          receiver moves, with a gimbal keeping the beam locked on target. I've 
-          worked through the full stack: from hardware-level SPI/UART protocols 
+          My FYP is a <strong>vision-assisted Pointing and Tracking (PAT) system</strong>
+          for indoor laser communication links — using a camera to re-find and
+          re-point a laser transmitter whenever the link is disturbed or the
+          receiver moves, with a gimbal keeping the beam locked on target. I've
+          worked through the full stack: from hardware-level SPI/UART protocols
           on ESP32 to cloud dashboards on Firebase.
         </p>
 
         <div style="margin-top:28px">
           <a href="mailto:ghulamaliqureshi12@gmail.com" class="btn-accent" style="font-size:13px;">
-            <i class="fas fa-envelope"></i> Get in touch
+            <i class="fas fa-envelope" aria-hidden="true"></i> Get in touch
           </a>
         </div>
       </div>
@@ -880,16 +985,16 @@
 
       <div class="proj-card featured reveal reveal-delay-1">
         <div class="proj-top">
-          <div class="proj-icon">🎯</div>
+          <div class="proj-icon" aria-hidden="true">🎯</div>
           <span class="proj-badge">FYP · IN PROGRESS</span>
         </div>
         <h3>Vision-Assisted Pointing & Tracking for Laser Comms</h3>
         <p>
-          Final Year Project: an indoor Pointing and Tracking (PAT) system that keeps 
-          a free-space laser communication link alive. Phase 1 uses a camera to 
-          re-locate a stationary receiver and re-point the transmitter whenever the 
-          link is disturbed, resuming communication from where it dropped. Phase 2 
-          extends this to a moving receiver, with a gimbal on the transmitter 
+          Final Year Project: an indoor Pointing and Tracking (PAT) system that keeps
+          a free-space laser communication link alive. Phase 1 uses a camera to
+          re-locate a stationary receiver and re-point the transmitter whenever the
+          link is disturbed, resuming communication from where it dropped. Phase 2
+          extends this to a moving receiver, with a gimbal on the transmitter
           tracking and locking the beam onto the target in real time.
         </p>
         <div class="proj-metrics">
@@ -906,14 +1011,14 @@
 
       <div class="proj-card reveal reveal-delay-2">
         <div class="proj-top">
-          <div class="proj-icon">🌡️</div>
+          <div class="proj-icon" aria-hidden="true">🌡️</div>
           <span class="proj-badge">DEPLOYED</span>
         </div>
         <h3>Real-Time Gas Monitoring — ESP32 + Firebase</h3>
         <p>
-          MQ2-sensor system with calibrated baseline sampling, 
+          MQ2-sensor system with calibrated baseline sampling,
           threshold alerting, and cloud logging. Achieved
-          ~300 ms end-to-end alert latency with a 30% 
+          ~300 ms end-to-end alert latency with a 30%
           reduction in false positives via rolling average filtering.
         </p>
         <div class="proj-metrics">
@@ -929,13 +1034,13 @@
 
       <div class="proj-card reveal reveal-delay-3">
         <div class="proj-top">
-          <div class="proj-icon">💡</div>
+          <div class="proj-icon" aria-hidden="true">💡</div>
           <span class="proj-badge">COMPLETE</span>
         </div>
         <h3>Hybrid VLC + Wi-Fi Communication</h3>
         <p>
-          ESP32-based Visible Light Communication system with XOR 
-          encryption, seamlessly switching to Wi-Fi fallback whenever 
+          ESP32-based Visible Light Communication system with XOR
+          encryption, seamlessly switching to Wi-Fi fallback whenever
           the optical channel drops.
         </p>
         <div class="proj-tags">
@@ -946,13 +1051,13 @@
 
       <div class="proj-card reveal reveal-delay-4">
         <div class="proj-top">
-          <div class="proj-icon">⚡</div>
+          <div class="proj-icon" aria-hidden="true">⚡</div>
           <span class="proj-badge">COMPLETE</span>
         </div>
         <h3>Multi-Protocol Comms — Arduino ↔ ESP32</h3>
         <p>
-          UART and SPI communication bridges between Arduino Uno 
-          (master) and ESP32 (slave), using the native ESP32 SPI driver. 
+          UART and SPI communication bridges between Arduino Uno
+          (master) and ESP32 (slave), using the native ESP32 SPI driver.
           Extended to simultaneous UART/SPI with role reversal.
         </p>
         <div class="proj-tags">
@@ -977,26 +1082,26 @@
     </div>
 
     <div class="skills-layout">
-      <div class="skills-nav reveal reveal-delay-1">
-        <div class="skill-tab active" data-tab="embedded">
-          <i class="fas fa-microchip"></i> Embedded & Hardware
-        </div>
-        <div class="skill-tab" data-tab="ai">
-          <i class="fas fa-brain"></i> AI & Vision
-        </div>
-        <div class="skill-tab" data-tab="languages">
-          <i class="fas fa-code"></i> Languages
-        </div>
-        <div class="skill-tab" data-tab="cloud">
-          <i class="fas fa-cloud"></i> Cloud & IoT
-        </div>
-        <div class="skill-tab" data-tab="tools">
-          <i class="fas fa-wrench"></i> Tools
-        </div>
+      <div class="skills-nav reveal reveal-delay-1" role="tablist" aria-label="Skill categories">
+        <button class="skill-tab" role="tab" id="tab-embedded" aria-selected="true" aria-controls="panel-embedded" data-tab="embedded">
+          <i class="fas fa-microchip" aria-hidden="true"></i> Embedded & Hardware
+        </button>
+        <button class="skill-tab" role="tab" id="tab-ai" aria-selected="false" aria-controls="panel-ai" data-tab="ai">
+          <i class="fas fa-brain" aria-hidden="true"></i> AI & Vision
+        </button>
+        <button class="skill-tab" role="tab" id="tab-languages" aria-selected="false" aria-controls="panel-languages" data-tab="languages">
+          <i class="fas fa-code" aria-hidden="true"></i> Languages
+        </button>
+        <button class="skill-tab" role="tab" id="tab-cloud" aria-selected="false" aria-controls="panel-cloud" data-tab="cloud">
+          <i class="fas fa-cloud" aria-hidden="true"></i> Cloud & IoT
+        </button>
+        <button class="skill-tab" role="tab" id="tab-tools" aria-selected="false" aria-controls="panel-tools" data-tab="tools">
+          <i class="fas fa-wrench" aria-hidden="true"></i> Tools
+        </button>
       </div>
 
       <div class="skill-panels reveal reveal-delay-2">
-        <div class="skill-panel active" id="panel-embedded">
+        <div class="skill-panel active" id="panel-embedded" role="tabpanel" aria-labelledby="tab-embedded">
           <div class="skill-item"><div class="skill-name">ESP32</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
           <div class="skill-item"><div class="skill-name">Arduino</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
           <div class="skill-item"><div class="skill-name">SPI</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
@@ -1005,28 +1110,28 @@
           <div class="skill-item"><div class="skill-name">LiDAR Integration</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:65%"></div></div></div>
         </div>
 
-        <div class="skill-panel" id="panel-ai">
+        <div class="skill-panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai">
           <div class="skill-item"><div class="skill-name">OpenCV</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
           <div class="skill-item"><div class="skill-name">YOLO</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
           <div class="skill-item"><div class="skill-name">TensorFlow Lite</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:60%"></div></div></div>
           <div class="skill-item"><div class="skill-name">Edge AI</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
         </div>
 
-        <div class="skill-panel" id="panel-languages">
+        <div class="skill-panel" id="panel-languages" role="tabpanel" aria-labelledby="tab-languages">
           <div class="skill-item"><div class="skill-name">C</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
           <div class="skill-item"><div class="skill-name">C++</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:82%"></div></div></div>
           <div class="skill-item"><div class="skill-name">Python</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:78%"></div></div></div>
           <div class="skill-item"><div class="skill-name">JavaScript</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:60%"></div></div></div>
         </div>
 
-        <div class="skill-panel" id="panel-cloud">
+        <div class="skill-panel" id="panel-cloud" role="tabpanel" aria-labelledby="tab-cloud">
           <div class="skill-item"><div class="skill-name">Firebase</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
           <div class="skill-item"><div class="skill-name">MQTT</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:72%"></div></div></div>
           <div class="skill-item"><div class="skill-name">REST APIs</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
           <div class="skill-item"><div class="skill-name">VLC Protocol</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
         </div>
 
-        <div class="skill-panel" id="panel-tools">
+        <div class="skill-panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
           <div class="skill-item"><div class="skill-name">Git</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
           <div class="skill-item"><div class="skill-name">PlatformIO</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
           <div class="skill-item"><div class="skill-name">KiCad</div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:55%"></div></div></div>
@@ -1046,43 +1151,45 @@
         <div class="sec-num" style="margin-bottom:14px">04 / CONTACT</div>
         <h2>Let's build<br>something real.</h2>
         <p style="margin-top:16px;">
-          Interested in embedded systems, edge AI, vision-guided tracking, 
+          Interested in embedded systems, edge AI, vision-guided tracking,
           or just want to discuss research? My inbox is open.
         </p>
       </div>
 
       <div class="contact-links reveal reveal-delay-2">
         <a href="mailto:ghulamaliqureshi12@gmail.com" class="contact-link">
-          <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-link-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
           <div class="contact-link-body">
             <strong>Email</strong>
             <span>ghulamaliqureshi12@gmail.com</span>
           </div>
-          <i class="fas fa-arrow-right arrow"></i>
+          <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
         </a>
 
         <a href="https://github.com/ghulamaliqureshi" class="contact-link" target="_blank" rel="noopener">
-          <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+          <div class="contact-link-icon" aria-hidden="true"><i class="fab fa-github"></i></div>
           <div class="contact-link-body">
             <strong>GitHub</strong>
             <span>@ghulamaliqureshi</span>
           </div>
-          <i class="fas fa-arrow-right arrow"></i>
+          <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
         </a>
 
         <a href="https://www.linkedin.com/in/ghulamaliqureshi" class="contact-link" target="_blank" rel="noopener">
-          <div class="contact-link-icon"><i class="fab fa-linkedin-in"></i></div>
+          <div class="contact-link-icon" aria-hidden="true"><i class="fab fa-linkedin-in"></i></div>
           <div class="contact-link-body">
             <strong>LinkedIn</strong>
             <span>ghulamaliqureshi</span>
           </div>
-          <i class="fas fa-arrow-right arrow"></i>
+          <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap footer-inner">
@@ -1153,9 +1260,9 @@
 
   document.querySelectorAll('.skill-tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.skill-tab').forEach(t => t.setAttribute('aria-selected', 'false'));
       document.querySelectorAll('.skill-panel').forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
       animateBars();
     });
@@ -1176,6 +1283,32 @@
     }
   }, { threshold: 0.2 });
   barObs.observe(skillsEl);
+
+  // Mobile menu
+  const burger   = document.getElementById('navBurger');
+  const menu     = document.getElementById('mobileMenu');
+  const overlay  = document.getElementById('mobileOverlay');
+  const closeBtn = document.getElementById('mobileMenuClose');
+
+  function openMenu() {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    closeBtn.focus();
+  }
+  function closeMenu() {
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.focus();
+  }
+  burger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+  });
 </script>
 
 </body>
